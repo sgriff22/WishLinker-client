@@ -1,0 +1,44 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+
+@layer base {
+  body {
+    background-color: #f0f0f0;
+    font-size: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+
+
+
+  button,
+  button[type="button"] {
+    font-size: 0.9rem;
+    background-color: gray;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+
+  button:hover,
+  button[type="button"]:hover {
+    font-size: 0.9rem;
+    background-color: white;
+    color: gray;
+    border: 1px gray solid;
+  }
+
+  a:hover {
+    color: gray;
+  }
+}
