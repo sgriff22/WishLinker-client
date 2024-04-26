@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import { apiUrl } from "../../utils";
 
 export const Register = () => {
   const [username, setUsername] = useState("admina@straytor.com");
@@ -12,7 +13,7 @@ export const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:8000/register`, {
+    fetch(`${apiUrl}/register`, {
       method: "POST",
       body: JSON.stringify({
         username,
