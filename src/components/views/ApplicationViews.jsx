@@ -3,6 +3,7 @@ import { Authorized } from "../auth/Authorized.jsx";
 import { Login } from "../auth/Login.jsx";
 import { Register } from "../auth/Register.jsx";
 import { Welcome } from "../welcome/Welcome.jsx";
+import { MyLists } from "../wishlists/MyLists.jsx";
 
 export const ApplicationViews = () => {
   return (
@@ -11,6 +12,7 @@ export const ApplicationViews = () => {
       <Route path="/register" element={<Register />} />
       <Route element={<Authorized />}>
         <Route path="/" element={<Welcome />} />
+        <Route path="myLists" element={<MyLists />} />
       </Route>
     </Routes>
   );

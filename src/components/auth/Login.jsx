@@ -3,11 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 export const Login = () => {
-  const [username, setUsername] = useState("tyler@hilliard.com");
-  const [password, setPassword] = useState("hilliard");
+  const [username, setUsername] = useState("ryan@ryantanay.com");
+  const [password, setPassword] = useState("tanay");
   const existDialog = useRef();
   const navigate = useNavigate();
-
 
   const handleLogin = (e) => {
     e.preventDefault();
