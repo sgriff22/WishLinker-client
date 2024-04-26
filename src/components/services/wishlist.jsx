@@ -8,3 +8,12 @@ export function getWishlists() {
     },
   });
 }
+
+export function getFilteredWishlists(searchQuery) {
+  const queryString = searchQuery ? `?q=${searchQuery}` : "";
+  return fetchWithResponse(`wishlists${queryString}`, {
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+}

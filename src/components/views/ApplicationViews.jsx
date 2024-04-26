@@ -4,6 +4,7 @@ import { Login } from "../auth/Login.jsx";
 import { Register } from "../auth/Register.jsx";
 import { Welcome } from "../welcome/Welcome.jsx";
 import { MyLists } from "../wishlists/MyLists.jsx";
+import { WishlistDetails } from "../wishlists/WishlistDetails.jsx";
 
 export const ApplicationViews = () => {
   return (
@@ -13,6 +14,9 @@ export const ApplicationViews = () => {
       <Route element={<Authorized />}>
         <Route path="/" element={<Welcome />} />
         <Route path="myLists" element={<MyLists />} />
+        <Route path="wishlist">
+          <Route path=":listId" element={<WishlistDetails />} />
+        </Route>
       </Route>
     </Routes>
   );

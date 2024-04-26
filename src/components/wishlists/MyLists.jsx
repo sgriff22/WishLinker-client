@@ -1,25 +1,38 @@
 import { useEffect, useState } from "react";
-import { getWishlists } from "../services/wishlist";
+import { getFilteredWishlists, getWishlists } from "../services/wishlist";
 import { WishlistCard } from "./WishlistCard";
 
 export const MyLists = () => {
   const [publicWishlists, setPublicWishlists] = useState([]);
   const [privateWishlists, setPrivateWishlists] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     getWishlists().then((res) => {
-      // Filter wishlists based on public/private
-      const publicWishlistsData = res.filter((wishlist) => !wishlist.private);
-      const privateWishlistsData = res.filter((wishlist) => wishlist.private);
-
-      setPublicWishlists(publicWishlistsData);
-      setPrivateWishlists(privateWishlistsData);
+      setPublicWishlists(res.public);
+      setPrivateWishlists(res.private);
     });
   }, []);
 
+  const handleInputChange = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+    // Initiate API request with search query parameter
+    getFilteredWishlists(query).then((res) => {
+      setPublicWishlists(res.public);
+      setPrivateWishlists(res.private);
+    });
+  };
+
   return (
     <div>
-      <div>My Wishlists</div>
+      <h1>My Wishlists</h1>
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={handleInputChange}
+        placeholder="Search for wishlist..."
+      />
       <div>
         <h2>
           Private{" "}
@@ -28,7 +41,7 @@ export const MyLists = () => {
           </span>
         </h2>
         {privateWishlists.map((list) => (
-          <WishlistCard key={list.id} list={list} />
+          <WishlistCard key={list.id} list={list} private={true} />
         ))}
       </div>
       <div>
@@ -39,7 +52,7 @@ export const MyLists = () => {
           </span>
         </h2>
         {publicWishlists.map((list) => (
-          <WishlistCard key={list.id} list={list} />
+          <WishlistCard key={list.id} list={list} private={false} />
         ))}
       </div>
     </div>
