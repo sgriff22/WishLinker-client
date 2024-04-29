@@ -17,3 +17,11 @@ export function getFilteredWishlists(searchQuery) {
     },
   });
 }
+
+export function getWishlistById(id) {
+  return fetchWithResponse(`wishlists/${id}`, {
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+}
