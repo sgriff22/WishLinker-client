@@ -62,5 +62,5 @@ export const FilterBar = ({ setWishlist, id }) => {
 
 FilterBar.propTypes = {
   setWishlist: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
 };

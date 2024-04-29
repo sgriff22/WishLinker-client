@@ -21,7 +21,7 @@ export const WishlistDetails = () => {
   return (
     <div>
       <h1>{wishlist.title}</h1>
-      <h2>Owner Name</h2>
+      <h2>{wishlist.user?.first_name} {wishlist.user?.last_name}</h2>
       <h3>{eventDate}</h3>
       <p>{wishlist.description}</p>
       <p>Mailing Address</p>
