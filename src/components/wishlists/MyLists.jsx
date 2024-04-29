@@ -31,6 +31,7 @@ export const MyLists = () => {
       <h1>My Wishlists</h1>
       <input
         type="text"
+        name="search"
         value={searchQuery}
         onChange={handleInputChange}
         placeholder="Search for wishlist..."

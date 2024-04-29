@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getWishlistById } from "../services/wishlist";
 import { formatDate } from "../../utils";
 import { ItemCard } from "./ItemCard";
+import { FilterBar } from "./FilterBar";
 
 export const WishlistDetails = () => {
   const [wishlist, setWishlist] = useState({});
@@ -28,12 +29,17 @@ export const WishlistDetails = () => {
       <p>
         {parts[1]}, {parts[2]}
       </p>
+      <FilterBar
+        setWishlist={setWishlist}
+        items={wishlist.items}
+        id={wishlist.id}
+      />
       {wishlist.wishlist_items && wishlist.wishlist_items.length > 0 ? (
         wishlist.wishlist_items.map((item) => (
           <ItemCard key={item.id} item={item} />
         ))
       ) : (
-        <p>No items in the wishlist. Add items</p>
+        <p>No items in wishlist. Add items or adjust your filter.</p>
       )}
     </div>
   );

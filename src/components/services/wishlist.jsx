@@ -25,3 +25,22 @@ export function getWishlistById(id) {
     },
   });
 }
+
+export function getFilteredItems(listId, searchQuery, priorityName) {
+  let queryString = "";
+
+  // Construct the query string based on provided parameters
+  if (searchQuery && priorityName) {
+    queryString = `?q=${searchQuery}&priority_level=${priorityName}`;
+  } else if (searchQuery) {
+    queryString = `?q=${searchQuery}`;
+  } else if (priorityName) {
+    queryString = `?priority_level=${priorityName}`;
+  }
+
+  return fetchWithResponse(`wishlists/${listId}${queryString}`, {
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+}
