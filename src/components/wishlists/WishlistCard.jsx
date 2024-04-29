@@ -26,14 +26,14 @@ export const WishlistCard = ({ list }) => {
 
 WishlistCard.propTypes = {
   list: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    spoil_surprises: PropTypes.bool.isRequired,
-    address: PropTypes.string.isRequired,
-    creation_date: PropTypes.string.isRequired,
-    date_of_event: PropTypes.string.isRequired,
-    pinned: PropTypes.bool.isRequired,
-  }).isRequired,
+    id: PropTypes.number,
+    user: PropTypes.object,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    spoil_surprises: PropTypes.bool,
+    address: PropTypes.string,
+    creation_date: PropTypes.string,
+    date_of_event: PropTypes.string,
+    pinned: PropTypes.bool,
+  }),
 };
