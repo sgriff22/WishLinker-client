@@ -1,5 +1,4 @@
 import './App.css'
-
 import { BrowserRouter } from "react-router-dom";
 import { ApplicationViews } from "./components/views/ApplicationViews";
 
