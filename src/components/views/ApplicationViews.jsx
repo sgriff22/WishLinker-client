@@ -5,6 +5,7 @@ import { Register } from "../auth/Register.jsx";
 import { Welcome } from "../welcome/Welcome.jsx";
 import { MyLists } from "../wishlists/MyLists.jsx";
 import { WishlistDetails } from "../wishlists/WishlistDetails.jsx";
+import { NewWishlist } from "../forms/NewWishlist.jsx";
 
 export const ApplicationViews = () => {
   return (
@@ -16,6 +17,7 @@ export const ApplicationViews = () => {
         <Route path="myLists" element={<MyLists />} />
         <Route path="wishlist">
           <Route path=":listId" element={<WishlistDetails />} />
+          <Route path="newWishlist" element={<NewWishlist />} />
         </Route>
       </Route>
     </Routes>

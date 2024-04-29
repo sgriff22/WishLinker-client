@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getFilteredWishlists, getWishlists } from "../services/wishlist";
 import { WishlistCard } from "./WishlistCard";
+import { useNavigate } from "react-router-dom";
 
 export const MyLists = () => {
   const [publicWishlists, setPublicWishlists] = useState([]);
@@ -23,6 +24,7 @@ export const MyLists = () => {
       setPrivateWishlists(res.private);
     });
   };
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -36,7 +38,7 @@ export const MyLists = () => {
       <div>
         <h2>
           Private{" "}
-          <span>
+          <span onClick={() => navigate("/wishlist/newWishlist")}>
             <i className="fa-solid fa-plus"></i>
           </span>
         </h2>
@@ -47,7 +49,7 @@ export const MyLists = () => {
       <div>
         <h2>
           Public{" "}
-          <span>
+          <span onClick={() => navigate("/wishlist/newWishlist")}>
             <i className="fa-solid fa-plus"></i>
           </span>
         </h2>
