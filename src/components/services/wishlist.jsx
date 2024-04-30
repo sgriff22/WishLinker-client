@@ -44,3 +44,14 @@ export function getFilteredItems(listId, searchQuery, priorityName) {
     },
   });
 }
+
+export function createWishlist(list) {
+  return fetchWithResponse("wishlists", {
+    method: "POST",
+    headers: {
+      Authorization: getToken(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(list),
+  });
+}

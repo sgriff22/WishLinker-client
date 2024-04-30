@@ -32,7 +32,7 @@ export const NavBar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-gray-300 py-4">
+    <nav className="fixed top-0 left-0 right-0 bg-gray-300 py-4 z-30">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-12">
           <div className="flex-shrink-0 flex items-center">
@@ -57,11 +57,15 @@ export const NavBar = () => {
                   <li>
                     <NavLink to={"/mylists"}>My Lists</NavLink>
                   </li>
-                  <li>New List</li>
+                  <li>
+                    <NavLink to={"wishlist/newWishlist"}>New List</NavLink>
+                  </li>
                   <li>Friends</li>
                   <li>Profile</li>
                   <li>
-                    <button onClick={handleLogout} className="mt-5">Logout</button>
+                    <button onClick={handleLogout} className="mt-5">
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </div>
