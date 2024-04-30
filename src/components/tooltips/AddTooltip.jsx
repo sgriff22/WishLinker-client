@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const AddItemTooltip = ({ tooltipText }) => {
+export const AddTooltip = ({ tooltipText }) => {
   return (
     <span className="group relative">
       <div className="absolute bottom-[calc(100%+0.5rem)] left-[70%] -translate-x-[50%] hidden group-hover:block w-auto">
@@ -24,6 +24,6 @@ export const AddItemTooltip = ({ tooltipText }) => {
   );
 };
 
-AddItemTooltip.propTypes = {
+AddTooltip.propTypes = {
   tooltipText: PropTypes.string.isRequired,
 };

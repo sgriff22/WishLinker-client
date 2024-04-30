@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getFilteredItems } from "../services/wishlist";
 import PropTypes from "prop-types";
 import { getPriorities } from "../services/priority";
-import { AddItemTooltip } from "../tooltips/AddItemTooltip";
+import { AddTooltip } from "../tooltips/AddTooltip";
 import { Link } from "react-router-dom";
 
 export const FilterBar = ({ setWishlist, id, listUserId, currentUserId }) => {
@@ -37,26 +37,31 @@ export const FilterBar = ({ setWishlist, id, listUserId, currentUserId }) => {
   };
 
   return (
-    <div>
-      <input
-        name="search"
-        type="text"
-        value={searchQuery}
-        placeholder="Search for item"
-        onChange={handleInputChange}
-        className="mb-5 mt-5 mr-5"
-      />
-      {currentUserId === listUserId ? (
-        <Link>
-          <AddItemTooltip tooltipText={"Add New Item"} />
-        </Link>
-      ) : (
+    <div className="flex justify-between items-center">
+      <div className="flex items-center">
+        <input
+          name="search"
+          type="text"
+          value={searchQuery}
+          placeholder="Search for item"
+          onChange={handleInputChange}
+          className="mb-5 mt-5 mr-5 text-lg p-1 rounded-lg border border-gray-400"
+        />
+        {currentUserId === listUserId && (
+          <Link>
+            <AddTooltip tooltipText={"Add New Item"} />
+          </Link>
+        )}
+      </div>
+
+      {currentUserId !== listUserId && (
         <select
+          className="w-55 text-lg p-1"
           value={selectedPriority}
           name="priority"
           onChange={handlePriorityChange}
         >
-          <option value="">Select Priority</option>
+          <option value="">Filter by priority level</option>
           {priorities.map((priority) => (
             <option key={priority.id} value={priority.name}>
               {priority.name}

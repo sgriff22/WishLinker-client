@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getFilteredWishlists, getWishlists } from "../services/wishlist";
 import { WishlistCard } from "./WishlistCard";
 import { useNavigate } from "react-router-dom";
+import { AddTooltip } from "../tooltips/AddTooltip";
 
 export const MyLists = () => {
   const [publicWishlists, setPublicWishlists] = useState([]);
@@ -35,28 +36,31 @@ export const MyLists = () => {
         value={searchQuery}
         onChange={handleInputChange}
         placeholder="Search for wishlist..."
+        className="my-5 text-lg p-1 rounded-lg border border-gray-400"
       />
-      <div>
-        <h2>
-          Private{" "}
-          <span onClick={() => navigate("/wishlist/newWishlist")}>
-            <i className="fa-solid fa-plus"></i>
-          </span>
-        </h2>
-        {privateWishlists.map((list) => (
-          <WishlistCard key={list.id} list={list} private={true} />
-        ))}
-      </div>
-      <div>
-        <h2>
-          Public{" "}
-          <span onClick={() => navigate("/wishlist/newWishlist")}>
-            <i className="fa-solid fa-plus"></i>
-          </span>
-        </h2>
-        {publicWishlists.map((list) => (
-          <WishlistCard key={list.id} list={list} private={false} />
-        ))}
+      <div className="flex justify-between">
+        <div>
+          <h2 className="flex justify-between">
+            Private{" "}
+            <span onClick={() => navigate("/wishlist/newWishlist")}>
+              <AddTooltip tooltipText={"Create New Wishlist"} />
+            </span>
+          </h2>
+          {privateWishlists.map((list) => (
+            <WishlistCard key={list.id} list={list} private={true} />
+          ))}
+        </div>
+        <div>
+          <h2 className="flex justify-between">
+            Public{" "}
+            <span onClick={() => navigate("/wishlist/newWishlist")}>
+              <AddTooltip tooltipText={"Create New Wishlist"} />
+            </span>
+          </h2>
+          {publicWishlists.map((list) => (
+            <WishlistCard key={list.id} list={list} private={false} />
+          ))}
+        </div>
       </div>
     </div>
   );

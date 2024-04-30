@@ -6,7 +6,7 @@ export const Authorized = () => {
     return (
       <>
         <NavBar />
-        <main className="p-4 mt-12">
+        <main className="p-4 mt-20">
           <Outlet />
         </main>
       </>
