@@ -12,10 +12,14 @@ export const getToken = () => {
 
 //Format date
 export const formatDate = (dateString) => {
-  const creationDate = new Date(dateString);
-  return creationDate.toLocaleString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  if (dateString) {
+    const creationDate = new Date(dateString);
+    return creationDate.toLocaleString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  } else {
+    return null;
+  }
 };
