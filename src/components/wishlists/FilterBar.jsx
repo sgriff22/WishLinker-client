@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { getFilteredItems } from "../services/wishlist";
 import PropTypes from "prop-types";
 import { getPriorities } from "../services/priority";
+import { AddItemTooltip } from "../tooltips/AddItemTooltip";
+import { Link } from "react-router-dom";
 
-export const FilterBar = ({ setWishlist, id }) => {
+export const FilterBar = ({ setWishlist, id, listUserId, currentUserId }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedPriority, setSelectedPriority] = useState("");
   const [priorities, setPriorities] = useState([]);
@@ -44,18 +46,24 @@ export const FilterBar = ({ setWishlist, id }) => {
         onChange={handleInputChange}
         className="mb-5 mt-5 mr-5"
       />
-      <select
-        value={selectedPriority}
-        name="priority"
-        onChange={handlePriorityChange}
-      >
-        <option value="">Select Priority</option>
-        {priorities.map((priority) => (
-          <option key={priority.id} value={priority.name}>
-            {priority.name}
-          </option>
-        ))}
-      </select>
+      {currentUserId === listUserId ? (
+        <Link>
+          <AddItemTooltip tooltipText={"Add New Item"} />
+        </Link>
+      ) : (
+        <select
+          value={selectedPriority}
+          name="priority"
+          onChange={handlePriorityChange}
+        >
+          <option value="">Select Priority</option>
+          {priorities.map((priority) => (
+            <option key={priority.id} value={priority.name}>
+              {priority.name}
+            </option>
+          ))}
+        </select>
+      )}
     </div>
   );
 };
@@ -63,4 +71,6 @@ export const FilterBar = ({ setWishlist, id }) => {
 FilterBar.propTypes = {
   setWishlist: PropTypes.func.isRequired,
   id: PropTypes.number,
+  currentUserId: PropTypes.number,
+  listUserId: PropTypes.number,
 };
