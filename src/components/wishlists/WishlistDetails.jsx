@@ -13,16 +13,40 @@ export const WishlistDetails = () => {
   const [wishlist, setWishlist] = useState({});
   const { listId } = useParams();
   const eventDate = formatDate(wishlist.date_of_event);
-  const parts = wishlist.address ? wishlist.address.split(", ") : [];
+  const [formattedAddress, setFormattedAddress] = useState("");
   const { profile } = useContext(AppContext);
 
-  const formatedDate = formatDate(wishlist.creation_date);
+  const creationDate = formatDate(wishlist.creation_date);
 
   useEffect(() => {
     getWishlistById(listId).then((res) => {
       setWishlist(res);
     });
   }, [listId]);
+
+  useEffect(() => {
+    if (wishlist.address) {
+      const parts = wishlist.address.split(", ");
+      let addressMarkup = (
+        <div>
+          <p>{parts[0]}</p>
+          {parts.length > 3 ? (
+            <>
+              <p>{parts[1]}</p>
+              <p>
+                {parts[2]}, {parts[3]}
+              </p>
+            </>
+          ) : (
+            <p>
+              {parts[1]}, {parts[2]}
+            </p>
+          )}
+        </div>
+      );
+      setFormattedAddress(addressMarkup);
+    }
+  }, [wishlist]);
 
   return (
     <div>
@@ -44,28 +68,21 @@ export const WishlistDetails = () => {
           <h2>
             {wishlist.user?.first_name} {wishlist.user?.last_name}
           </h2>
-          <h3>{eventDate}</h3>
+          {eventDate && <h3>Event Date: {eventDate}</h3>}
           <p>{wishlist.description}</p>
-          <p>Mailing Address</p>
-          <p>{parts[0]}</p>
-          {parts.length > 3 ? (
-            <>
-              <p>{parts[1]}</p>
-              <p>
-                {parts[2]}, {parts[3]}
-              </p>
-            </>
-          ) : (
-            <p>
-              {parts[1]}, {parts[2]}
-            </p>
+
+          {wishlist.address && (
+            <div>
+              <p>Mailing Address</p>
+              <div>{formattedAddress}</div>
+            </div>
           )}
         </div>
 
         {profile.user?.id === wishlist.user?.id && (
           <div className="pt-5 text-left text-sm">
             <div className="border border-gray-500 bg-gray-200 px-5 py-5">
-              <div>Created On: {formatedDate}</div>
+              <div>Created On: {creationDate}</div>
               <div>Private: {wishlist.private ? "Yes" : "No"}</div>
               <div>
                 Spoil Surprises: {wishlist.spoil_surprises ? "Yes" : "No"}

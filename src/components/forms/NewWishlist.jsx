@@ -26,12 +26,16 @@ export const NewWishlist = () => {
       window.alert("Please add title and description.");
       return;
     }
+
+    // Check if eventDate is provided before converting to ISO string
+    const isDate = eventDate ? new Date(eventDate).toISOString() : null;
+
     const addressString = getAddressString();
 
     const wishlist = {
       title: title,
       description: description,
-      date_of_event: new Date(eventDate).toISOString(),
+      date_of_event: isDate,
       private: isPrivate,
       spoil_surprises: spoil,
       address: addressString,
@@ -50,15 +54,33 @@ export const NewWishlist = () => {
     }));
   };
 
-  // Function to convert address object to comma-separated string
   const getAddressString = () => {
-    let addressString = address.street + ", ";
+    let addressString = "";
 
-    if (address.addressLine2) {
-      addressString += address.addressLine2 + ", ";
+    // Check if any part of the address is entered
+    if (
+      address.street ||
+      address.addressLine2 ||
+      address.city ||
+      address.state ||
+      address.zip
+    ) {
+      // Add street if it exists
+      if (address.street) {
+        addressString += address.street + ", ";
+      }
+
+      // Add addressLine2 if it exists
+      if (address.addressLine2) {
+        addressString += address.addressLine2 + ", ";
+      }
+
+      // Add city, state, and zip
+      addressString += address.city + ", " + address.state + " " + address.zip;
+    } else {
+      // If no part of the address is entered, set addressString to null
+      addressString = null;
     }
-
-    addressString += address.city + ", " + address.state + " " + address.zip;
 
     return addressString;
   };
