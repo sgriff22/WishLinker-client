@@ -10,7 +10,7 @@ export const WishlistCard = ({ list }) => {
       <div>
         <div>
           <div>
-            <div className="h-full text-left flex border-gray-200 border p-4 rounded-lg bg-gray-100">
+            <div className="mb-5 h-full text-left flex border-gray-200 border p-4 rounded-lg bg-gray-100">
               <div>
                 <h2>{list.title}</h2>
                 <p>{list.description}</p>

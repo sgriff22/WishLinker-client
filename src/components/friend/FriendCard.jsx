@@ -2,21 +2,17 @@ import PropTypes from "prop-types";
 
 export const FriendCard = ({ friend }) => {
   return (
-    <div className="flex flex-wrap">
-      <div className="p-2 w-full">
-        <div className="h-full flex items-center bg-gray-100 border-gray-300 border p-4 rounded-lg">
-          <img
-            alt="team"
-            className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-            src="https://dummyimage.com/80x80"
-          />
-          <div>
-            <h2 className="text-gray-900 title-font font-medium text-lg">
-              {friend.first_name} {friend.last_name}
-            </h2>
-            <p className="text-gray-500 text-sm">{friend.username}</p>
-          </div>
-        </div>
+    <div className="max-w-md bg-white shadow-md rounded-lg mx-auto flex items-center p-3 m-5">
+      <img
+        className="w-16 h-auto object-cover object-center overflow-hidden mr-4"
+        src="/public/media/images/Wish_logo.png"
+        alt="Friend Image"
+      />
+      <div className="flex-grow">
+        <h1 className="text-gray-900 font-semibold text-lg text-left">
+          {friend.first_name} {friend.last_name}
+        </h1>
+        <p className="text-gray-600 text-left text-sm">{friend.username}</p>
       </div>
     </div>
   );

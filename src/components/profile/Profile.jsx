@@ -19,7 +19,7 @@ export const Profile = () => {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-5">
+    <div className="grid grid-cols-3 gap-2">
       <h1 className="col-span-3 text-left -mb-3 ml-2 text-6xl mt-32">
         {profile.user.first_name} {profile.user.last_name}
       </h1>
@@ -33,7 +33,7 @@ export const Profile = () => {
         </div>
       </div>
       <div>
-        <div className="m-2 bg-gray-300 pt-2 px-10 pb-10 -mt-32">
+        <div className="m-2 bg-gray-300 pt-2 px-10 pb-10 -mt-40">
           <h2 className="mb-1">My Friends</h2>
           {profile.friends.map((f) => {
             return (
