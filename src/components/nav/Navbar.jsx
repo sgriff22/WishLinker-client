@@ -61,7 +61,9 @@ export const NavBar = () => {
                     <NavLink to={"wishlist/newWishlist"}>New List</NavLink>
                   </li>
                   <li>Friends</li>
-                  <li>Profile</li>
+                  <li>
+                    <NavLink to={"/profile"}>Profile</NavLink>
+                  </li>
                   <li>
                     <button onClick={handleLogout} className="mt-5">
                       Logout
