@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { createWishlist } from "../services/wishlist";
 
 export const NewWishlist = () => {
@@ -15,6 +15,15 @@ export const NewWishlist = () => {
     state: "",
     zip: "",
   });
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if location state contains isPrivate value
+    if (location.state && location.state.isPrivate !== undefined) {
+      setIsPrivate(location.state.isPrivate);
+    }
+  }, [location.state]);
 
   const navigate = useNavigate();
 

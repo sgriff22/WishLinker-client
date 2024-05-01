@@ -42,7 +42,13 @@ export const MyLists = () => {
         <div>
           <h2 className="flex justify-between">
             Private{" "}
-            <span onClick={() => navigate("/wishlist/newWishlist")}>
+            <span
+              onClick={() =>
+                navigate("/wishlist/newWishlist", {
+                  state: { isPrivate: true },
+                })
+              }
+            >
               <AddTooltip tooltipText={"Create New Wishlist"} />
             </span>
           </h2>
