@@ -8,6 +8,7 @@ import { WishlistDetails } from "../wishlists/WishlistDetails.jsx";
 import { NewWishlist } from "../forms/NewWishlist.jsx";
 import { MyProfile } from "../profile/MyProfile.jsx";
 import { Profile } from "../profile/Profile.jsx";
+import { FriendsList } from "../friend/FriendsList.jsx";
 
 export const ApplicationViews = () => {
   return (
@@ -25,6 +26,7 @@ export const ApplicationViews = () => {
           <Route index element={<MyProfile />} />
           <Route path=":userId" element={<Profile />} />
         </Route>
+        <Route path="friends" element={<FriendsList />} />
       </Route>
     </Routes>
   );
