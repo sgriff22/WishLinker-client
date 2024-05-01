@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import { apiUrl } from "../../utils";
 
 export const Register = () => {
   const [username, setUsername] = useState("admina@straytor.com");
@@ -12,7 +13,7 @@ export const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:8000/register`, {
+    fetch(`${apiUrl}/register`, {
       method: "POST",
       body: JSON.stringify({
         username,
@@ -48,10 +49,11 @@ export const Register = () => {
       </dialog>
 
       <section>
-        <form className="form--login border shadow-md" onSubmit={handleRegister}>
-          <h1 className="text-center text-4xl mt-7 mb-3">
-            WishLinker
-          </h1>
+        <form
+          className="form--login border shadow-md"
+          onSubmit={handleRegister}
+        >
+          <h1 className="text-center text-4xl mt-7 mb-3">WishLinker</h1>
           <h2 className="text-xl mb-5 text-center">Register new account</h2>
           <fieldset className="mb-4">
             <label htmlFor="firstName"> First name </label>
