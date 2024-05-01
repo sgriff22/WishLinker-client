@@ -6,6 +6,8 @@ import { Welcome } from "../welcome/Welcome.jsx";
 import { MyLists } from "../wishlists/MyLists.jsx";
 import { WishlistDetails } from "../wishlists/WishlistDetails.jsx";
 import { NewWishlist } from "../forms/NewWishlist.jsx";
+import { MyProfile } from "../profile/MyProfile.jsx";
+import { Profile } from "../profile/Profile.jsx";
 
 export const ApplicationViews = () => {
   return (
@@ -18,6 +20,10 @@ export const ApplicationViews = () => {
         <Route path="wishlist">
           <Route path=":listId" element={<WishlistDetails />} />
           <Route path="newWishlist" element={<NewWishlist />} />
+        </Route>
+        <Route path="profile">
+          <Route index element={<MyProfile />} />
+          <Route path=":userId" element={<Profile />} />
         </Route>
       </Route>
     </Routes>
