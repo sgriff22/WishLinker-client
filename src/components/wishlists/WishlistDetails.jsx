@@ -130,6 +130,7 @@ export const WishlistDetails = () => {
             listUserId={wishlist.user?.id}
             currentUserId={profile.user?.id}
             currentUserFriends={profile?.friends}
+            setWishlist={setWishlist}
           />
         ))
       ) : (
