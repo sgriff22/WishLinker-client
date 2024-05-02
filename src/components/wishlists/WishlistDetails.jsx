@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { getWishlistById } from "../services/wishlist";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { deleteWishlist, getWishlistById } from "../services/wishlist";
 import { formatDate } from "../../utils";
 import { ItemCard } from "./ItemCard";
 import { FilterBar } from "./FilterBar";
@@ -17,6 +17,8 @@ export const WishlistDetails = () => {
   const { profile } = useContext(AppContext);
 
   const creationDate = formatDate(wishlist.creation_date);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getWishlistById(listId).then((res) => {
@@ -48,6 +50,24 @@ export const WishlistDetails = () => {
     }
   }, [wishlist]);
 
+  const handleDelete = () => {
+    // Display confirmation dialog
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this wishlist?"
+    );
+
+    // If user confirms, proceed with deletion
+    if (confirmed) {
+      deleteWishlist(wishlist.id)
+        .then(() => {
+          navigate("/myLists");
+        })
+        .catch((error) => {
+          console.error("Error deleting wishlist:", error);
+        });
+    }
+  };
+
   return (
     <div>
       <div className="flex justify-center">
@@ -58,7 +78,10 @@ export const WishlistDetails = () => {
                 <EditTooltip tooltipText={"Edit Wishlist"} />
               </Link>
 
-              <DeleteTooltip tooltipText={"Delete Wishlist"} />
+              <DeleteTooltip
+                tooltipText={"Delete Wishlist"}
+                handleDelete={handleDelete}
+              />
             </>
           )}
         </div>

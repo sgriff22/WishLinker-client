@@ -1,5 +1,5 @@
 import { getToken } from "../../utils";
-import { fetchWithResponse } from "./fetcher";
+import { fetchWithResponse, fetchWithoutResponse } from "./fetcher";
 
 export function getWishlists() {
   return fetchWithResponse("wishlists", {
@@ -53,5 +53,14 @@ export function createWishlist(list) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(list),
+  });
+}
+
+export function deleteWishlist(listId) {
+  return fetchWithoutResponse(`wishlists/${listId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: getToken(),
+    },
   });
 }
