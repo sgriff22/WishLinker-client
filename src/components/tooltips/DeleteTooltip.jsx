@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const DeleteTooltip = ({ tooltipText }) => {
+export const DeleteTooltip = ({ tooltipText, handleDelete }) => {
   return (
     <span className="group relative">
       <div className="absolute bottom-[calc(100%+0.5rem)] left-[66%] -translate-x-[50%] hidden group-hover:block w-auto">
@@ -17,7 +17,7 @@ export const DeleteTooltip = ({ tooltipText }) => {
           </svg>
         </div>
       </div>
-      <span>
+      <span onClick={handleDelete}>
         <i className="fa-solid fa-trash hover:text-gray-400 cursor-pointer ml-4"></i>
       </span>
     </span>
@@ -26,4 +26,5 @@ export const DeleteTooltip = ({ tooltipText }) => {
 
 DeleteTooltip.propTypes = {
   tooltipText: PropTypes.string.isRequired,
+  handleDelete: PropTypes.func,
 };
