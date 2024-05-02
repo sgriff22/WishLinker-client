@@ -74,7 +74,7 @@ export const WishlistDetails = () => {
         <div className="pt-3">
           {profile.user?.id === wishlist.user?.id && (
             <>
-              <Link>
+              <Link to={`/wishlist/${wishlist.id}/editWishlist`}>
                 <EditTooltip tooltipText={"Edit Wishlist"} />
               </Link>
 
@@ -106,7 +106,7 @@ export const WishlistDetails = () => {
           <div className="pt-5 text-left text-sm">
             <div className="border border-gray-500 bg-gray-200 px-5 py-5">
               <div>Created On: {creationDate}</div>
-              <div>Private: {wishlist.private ? "Yes" : "No"}</div>
+              <div>{wishlist.private ? "Private" : "Public"}</div>
               <div>
                 Spoil Surprises: {wishlist.spoil_surprises ? "Yes" : "No"}
               </div>

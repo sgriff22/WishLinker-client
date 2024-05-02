@@ -64,3 +64,14 @@ export function deleteWishlist(listId) {
     },
   });
 }
+
+export function updateWishlist(id, list) {
+  return fetchWithoutResponse(`wishlists/${id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: getToken(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(list),
+  });
+}
