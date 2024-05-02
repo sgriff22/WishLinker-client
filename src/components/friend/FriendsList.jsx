@@ -7,10 +7,13 @@ import {
   unfriend,
 } from "../services/friends";
 import { getCurrentUserProfile } from "../services/profile";
+import { useNavigate } from "react-router-dom";
 
 export const FriendsList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { profile, setProfile } = useContext(AppContext);
+
+  const navigate = useNavigate();
 
   if (!profile || !profile.user) {
     return <div>Loading...</div>;
@@ -62,7 +65,13 @@ export const FriendsList = () => {
           onChange={handleInputChange}
           className="mb-5 mt-5 mr-5 text-lg p-1 rounded-lg border border-gray-400"
         />
-        <button>Add New Friend</button>
+        <button
+          onClick={() => {
+            navigate("/findFriend");
+          }}
+        >
+          Add New Friend
+        </button>
         {profile.friends.map((f) => (
           <FriendCardButton
             key={f.friend_info.id}

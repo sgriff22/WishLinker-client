@@ -30,3 +30,32 @@ export function getFilteredFriends(searchQuery) {
     },
   });
 }
+
+export function getUsers() {
+  return fetchWithResponse("friends/get_all_users", {
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+}
+
+export function getFilteredUsers(searchQuery) {
+  const queryString = `?q=${searchQuery}`;
+
+  return fetchWithResponse(`friends/get_all_users${queryString}`, {
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+}
+
+export function addFriend(request) {
+  return fetchWithResponse("friends", {
+    method: "POST",
+    headers: {
+      Authorization: getToken(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ user_id: request }),
+  });
+}
