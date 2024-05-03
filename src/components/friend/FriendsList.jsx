@@ -37,18 +37,29 @@ export const FriendsList = () => {
     }
   };
 
-  const handleUnfriend = (friendId) => {
-    unfriend(friendId).then(() => {
-      getCurrentUserProfile().then((res) => {
-        setProfile(res);
+  const handleUnfriend = (friendId, friendFirstName, friendLastName) => {
+    // Display confirmation dialog
+    const confirmed = window.confirm(
+      `Are you sure you want to unfriend ${friendFirstName} ${friendLastName}?`
+    );
+
+    if (confirmed) {
+      unfriend(friendId).then(() => {
+        getCurrentUserProfile().then((res) => {
+          setProfile(res);
+          alert(
+            `You ${friendFirstName} ${friendLastName} are no longer friends.`
+          );
+        });
       });
-    });
+    }
   };
 
-  const handleAccept = (requestId) => {
+  const handleAccept = (requestId, friendFirstName, friendLastName) => {
     acceptFriendRequest(requestId).then(() => {
       getCurrentUserProfile().then((res) => {
         setProfile(res);
+        alert(`You ${friendFirstName} ${friendLastName} are now friends.`);
       });
     });
   };
@@ -77,7 +88,13 @@ export const FriendsList = () => {
             key={f.friend_info.id}
             friend={f}
             buttonText={"Unfriend"}
-            buttonHandler={() => handleUnfriend(f.id)}
+            buttonHandler={() =>
+              handleUnfriend(
+                f.id,
+                f.friend_info.first_name,
+                f.friend_info.last_name
+              )
+            }
           />
         ))}
       </div>
@@ -88,7 +105,13 @@ export const FriendsList = () => {
             key={f.friend_info.id}
             friend={f}
             buttonText={"Accept"}
-            buttonHandler={() => handleAccept(f.id)}
+            buttonHandler={() =>
+              handleAccept(
+                f.id,
+                f.friend_info.first_name,
+                f.friend_info.last_name
+              )
+            }
           />
         ))}
       </div>
