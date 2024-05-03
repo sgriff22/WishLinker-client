@@ -20,3 +20,22 @@ export function deleteItem(itemId) {
     },
   });
 }
+
+export function getItemById(itemId) {
+  return fetchWithResponse(`wishlist_items/${itemId}`, {
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+}
+
+export function editItem(id, item) {
+  return fetchWithoutResponse(`wishlist_items/${id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: getToken(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(item),
+  });
+}

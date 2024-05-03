@@ -42,7 +42,7 @@ export const ItemCard = ({
     <div>
       {listUserId === currentUserId && (
         <div className="flex justify-end mb-4 mr-10">
-          <Link>
+          <Link to={`editItem/${item.id}`}>
             <EditTooltip tooltipText={"Edit Item"} />
           </Link>
 
