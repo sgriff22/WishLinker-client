@@ -118,9 +118,7 @@ export const NewWishlist = () => {
               setDescription(e.target.value);
             }}
             value={description}
-            className="form-control"
-            rows="4"
-            cols="50"
+            className="form-control block  h-20"
           />
         </fieldset>
         <fieldset className="mt-2 text-lg">
