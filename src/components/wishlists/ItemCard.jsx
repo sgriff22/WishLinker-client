@@ -3,28 +3,53 @@ import { Link } from "react-router-dom";
 import { EditTooltip } from "../tooltips/EditTooltip";
 import { DeleteTooltip } from "../tooltips/DeleteTooltip";
 import { PurchasedTooltip } from "../tooltips/PurchasedTooltip";
+import { getWishlistById } from "../services/wishlist";
+import { deleteItem } from "../services/items";
 
 export const ItemCard = ({
   item,
   listUserId,
   currentUserId,
   currentUserFriends,
+  setWishlist,
 }) => {
-  
   // Filter the friends list to ensure that the current user is viewing a friend's list
   const isUserAFriend = currentUserFriends?.some(
     (friend) => friend.friend_info.id === listUserId
   );
 
+  const handleDelete = () => {
+    // Display confirmation dialog
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
+
+    // If user confirms, proceed with deletion
+    if (confirmed) {
+      deleteItem(item.id)
+        .then(() => {
+          getWishlistById(item.wishlist).then((res) => {
+            setWishlist(res);
+          });
+        })
+        .catch((error) => {
+          console.error("Error deleting wishlist:", error);
+        });
+    }
+  };
+
   return (
     <div>
       {listUserId === currentUserId && (
         <div className="flex justify-end mb-4 mr-10">
-          <Link>
+          <Link to={`editItem/${item.id}`}>
             <EditTooltip tooltipText={"Edit Item"} />
           </Link>
 
-          <DeleteTooltip tooltipText={"Delete Item"} />
+          <DeleteTooltip
+            tooltipText={"Delete Item"}
+            handleDelete={handleDelete}
+          />
         </div>
       )}
 
@@ -62,8 +87,10 @@ ItemCard.propTypes = {
     note: PropTypes.string,
     priority_name: PropTypes.string,
     quantity: PropTypes.number.isRequired,
+    wishlist: PropTypes.number,
   }).isRequired,
   listUserId: PropTypes.number,
   currentUserId: PropTypes.number,
   currentUserFriends: PropTypes.array,
+  setWishlist: PropTypes.func,
 };

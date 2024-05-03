@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { createWishlist } from "../services/wishlist";
+import { useNavigate, useParams } from "react-router-dom";
+import { getWishlistById, updateWishlist } from "../services/wishlist";
 
-export const NewWishlist = () => {
+export const EditWishlist = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [eventDate, setEventDate] = useState("");
@@ -16,32 +16,79 @@ export const NewWishlist = () => {
     zip: "",
   });
 
-  const location = useLocation();
+  const { listId } = useParams();
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
 
   useEffect(() => {
-    // Check if location state contains isPrivate value
-    if (location.state && location.state.isPrivate !== undefined) {
-      setIsPrivate(location.state.isPrivate);
-    }
-  }, [location.state]);
+    getWishlistById(listId).then((res) => {
+      setTitle(res.title);
+      setDescription(res.description);
+      const date = formatDate(res.date_of_event);
+      setEventDate(date);
+      setIsPrivate(res.private);
+      setSpoil(res.spoil_surprises);
+
+      if (res.address) {
+        const addressParts = res.address.split(", ");
+        const addressLength = addressParts.length;
+
+        let street, addressLine2, city, state, zip;
+
+        if (addressLength === 4) {
+          // Address format: "456 Elm Street, Apt 123, New York, NY 10001"
+          street = addressParts[0];
+          addressLine2 = addressParts[1];
+          city = addressParts[2];
+          state = addressParts[3].split(" ")[0];
+          zip = addressParts[3].split(" ")[1];
+        } else if (addressLength === 3) {
+          // Address format: "456 Elm Street, New York, NY 10001"
+          street = addressParts[0];
+          addressLine2 = "";
+          city = addressParts[1];
+          state = addressParts[2].split(" ")[0];
+          zip = addressParts[2].split(" ")[1];
+        }
+
+        setAddress({
+          street: street || "",
+          addressLine2: addressLine2 || "",
+          city: city || "",
+          state: state || "",
+          zip: zip || "",
+        });
+      } else {
+        // If res.address is null or undefined, reset the address state
+        setAddress({
+          street: "",
+          addressLine2: "",
+          city: "",
+          state: "",
+          zip: "",
+        });
+      }
+    });
+  }, [listId]);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if any of the fields are empty
-    if (!title || !description) {
-      window.alert("Please add title and description.");
-      return;
-    }
-
     // Check if eventDate is provided before converting to ISO string
     const isDate = eventDate ? new Date(eventDate).toISOString() : null;
 
-    const addressString = getAddressString();
+    const addressString = `${address.street}, ${address.addressLine2}, ${address.city}, ${address.state} ${address.zip}`;
 
-    const wishlist = {
+    const editedWishlist = {
       title: title,
       description: description,
       date_of_event: isDate,
@@ -50,8 +97,8 @@ export const NewWishlist = () => {
       address: addressString,
     };
 
-    createWishlist(wishlist).then((res) => {
-      navigate(`/wishlist/${res.id}`);
+    updateWishlist(listId, editedWishlist).then(() => {
+      navigate(`/wishlist/${listId}`);
     });
   };
 
@@ -63,41 +110,10 @@ export const NewWishlist = () => {
     }));
   };
 
-  const getAddressString = () => {
-    let addressString = "";
-
-    // Check if any part of the address is entered
-    if (
-      address.street ||
-      address.addressLine2 ||
-      address.city ||
-      address.state ||
-      address.zip
-    ) {
-      // Add street if it exists
-      if (address.street) {
-        addressString += address.street + ", ";
-      }
-
-      // Add addressLine2 if it exists
-      if (address.addressLine2) {
-        addressString += address.addressLine2 + ", ";
-      }
-
-      // Add city, state, and zip
-      addressString += address.city + ", " + address.state + " " + address.zip;
-    } else {
-      // If no part of the address is entered, set addressString to null
-      addressString = null;
-    }
-
-    return addressString;
-  };
-
   return (
     <div className="flex justify-center items-center mt-8">
-      <form className="w-full bg-gray-100  shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 max-w-2xl">
-        <h1 className="text-center">New Wishlist</h1>
+      <form className="w-full bg-gray-100 shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 max-w-2xl">
+        <h1 className="text-center">Edit Wishlist</h1>
         <fieldset className="mt-2 text-lg">
           <label htmlFor="title">Title:</label>
           <input
@@ -105,20 +121,18 @@ export const NewWishlist = () => {
             type="text"
             value={title}
             className="form-control"
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </fieldset>
         <fieldset className="mt-2 text-lg">
           <label htmlFor="description">Description:</label>
           <textarea
             id="description"
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
+            onChange={(e) => setDescription(e.target.value)}
             value={description}
-            className="form-control block  h-20"
+            className="form-control"
+            rows="4"
+            cols="50"
           />
         </fieldset>
         <fieldset className="mt-2 text-lg">
@@ -126,9 +140,7 @@ export const NewWishlist = () => {
           <input
             id="eventDate"
             type="date"
-            onChange={(e) => {
-              setEventDate(e.target.value);
-            }}
+            onChange={(e) => setEventDate(e.target.value)}
             value={eventDate}
             className="form-control"
           />
@@ -257,7 +269,9 @@ export const NewWishlist = () => {
         </fieldset>
 
         <fieldset className="mt-2 ml-80">
-          <button onClick={handleSubmit}>Submit</button>
+          <button type="submit" onClick={handleSubmit}>
+            Submit
+          </button>
         </fieldset>
       </form>
     </div>

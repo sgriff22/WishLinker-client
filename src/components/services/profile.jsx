@@ -8,3 +8,11 @@ export function getCurrentUserProfile() {
     },
   });
 }
+
+export function getProfileByUserId(userId) {
+  return fetchWithResponse(`profile/${userId}`, {
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+}

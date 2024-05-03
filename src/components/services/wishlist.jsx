@@ -1,5 +1,5 @@
 import { getToken } from "../../utils";
-import { fetchWithResponse } from "./fetcher";
+import { fetchWithResponse, fetchWithoutResponse } from "./fetcher";
 
 export function getWishlists() {
   return fetchWithResponse("wishlists", {
@@ -48,6 +48,26 @@ export function getFilteredItems(listId, searchQuery, priorityName) {
 export function createWishlist(list) {
   return fetchWithResponse("wishlists", {
     method: "POST",
+    headers: {
+      Authorization: getToken(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(list),
+  });
+}
+
+export function deleteWishlist(listId) {
+  return fetchWithoutResponse(`wishlists/${listId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+}
+
+export function updateWishlist(id, list) {
+  return fetchWithoutResponse(`wishlists/${id}`, {
+    method: "PUT",
     headers: {
       Authorization: getToken(),
       "Content-Type": "application/json",

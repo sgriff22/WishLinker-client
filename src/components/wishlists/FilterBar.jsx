@@ -48,7 +48,7 @@ export const FilterBar = ({ setWishlist, id, listUserId, currentUserId }) => {
           className="mb-5 mt-5 mr-5 text-lg p-1 rounded-lg border border-gray-400"
         />
         {currentUserId === listUserId && (
-          <Link>
+          <Link to={`/wishlist/${id}/newItem`}>
             <AddTooltip tooltipText={"Add New Item"} />
           </Link>
         )}
