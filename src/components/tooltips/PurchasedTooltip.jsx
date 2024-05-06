@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
-export const PurchasedTooltip = ({ tooltipText }) => {
+export const PurchasedTooltip = ({ tooltipText, handlePurchase }) => {
   return (
-    <span className="group relative">
+    <span className="group relative ml-72">
       <div className="absolute bottom-[calc(100%+0.5rem)] left-[50%] -translate-x-[50%] hidden group-hover:block w-auto mb-1">
         <div className="bottom-full right-0 rounded bg-black px-4 py-1 text-xs text-white whitespace-nowrap">
           {tooltipText}
@@ -18,7 +18,10 @@ export const PurchasedTooltip = ({ tooltipText }) => {
         </div>
       </div>
       <span>
-        <i className="fa-solid fa-money-check-dollar mt-16 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-400 cursor-pointer"></i>
+        <i
+          onClick={handlePurchase}
+          className="fa-solid fa-money-check-dollar text-black text-3xl mr-1"
+        ></i>
       </span>
     </span>
   );
@@ -26,4 +29,5 @@ export const PurchasedTooltip = ({ tooltipText }) => {
 
 PurchasedTooltip.propTypes = {
   tooltipText: PropTypes.string.isRequired,
+  handlePurchase: PropTypes.func,
 };

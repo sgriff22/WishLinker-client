@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 export const FriendCard = ({ friend }) => {
   return (
-    <div className="max-w-md bg-white shadow-md rounded-lg mx-auto flex items-center p-3 m-5">
+    <div className="max-w-md bg-white shadow-md rounded-lg mx-auto flex items-center p-3 m-5 hover:border-2 hover:border-rose-300 hover:shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1">
       <img
         className="w-16 h-auto object-cover object-center overflow-hidden mr-4"
         src="/public/media/images/Wish_logo.png"

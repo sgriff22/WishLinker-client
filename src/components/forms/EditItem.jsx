@@ -58,7 +58,7 @@ export const EditItem = () => {
 
   return (
     <div className="flex justify-center items-center mt-8">
-      <form className="w-full bg-gray-100  shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 max-w-2xl">
+      <form className="w-full bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 max-w-2xl">
         <h1 className="text-center">Edit Item</h1>
         <fieldset className="mt-2 text-lg">
           <label htmlFor="name">Name:</label>
@@ -69,6 +69,7 @@ export const EditItem = () => {
             name="name"
             className="form-control"
             autoComplete="name"
+            maxLength={50}
             onChange={handleChange}
           />
         </fieldset>
@@ -120,6 +121,7 @@ export const EditItem = () => {
             value={item.note}
             name="note"
             className="form-control block  h-20"
+            maxLength={50}
             onChange={handleChange}
           />
         </fieldset>

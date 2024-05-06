@@ -96,7 +96,7 @@ export const NewWishlist = () => {
 
   return (
     <div className="flex justify-center items-center mt-8">
-      <form className="w-full bg-gray-100  shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 max-w-2xl">
+      <form className="w-full bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 max-w-2xl">
         <h1 className="text-center">New Wishlist</h1>
         <fieldset className="mt-2 text-lg">
           <label htmlFor="title">Title:</label>
@@ -166,20 +166,6 @@ export const NewWishlist = () => {
           <div className="flex items-center">
             <div className="mr-8">
               <input
-                id="yesSpoil"
-                type="radio"
-                name="spoil"
-                value="true"
-                checked={spoil}
-                onChange={() => setSpoil(true)}
-                className="mr-2"
-              />
-              <label htmlFor="yesSpoil">
-                Yes, do not hide <br /> purchased items
-              </label>
-            </div>
-            <div>
-              <input
                 id="noSpoil"
                 type="radio"
                 name="spoil"
@@ -189,7 +175,21 @@ export const NewWishlist = () => {
                 className="mr-2"
               />
               <label htmlFor="noSpoil">
-                No, hide items <br /> once purchased
+                Yes, I want to be surprised <br /> do not hide purchased items
+              </label>
+            </div>
+            <div>
+              <input
+                id="yesSpoil"
+                type="radio"
+                name="spoil"
+                value="true"
+                checked={spoil}
+                onChange={() => setSpoil(true)}
+                className="mr-2"
+              />
+              <label htmlFor="yesSpoil">
+                No, spoil my surprises and <br /> hide items once purchased
               </label>
             </div>
           </div>
@@ -204,7 +204,7 @@ export const NewWishlist = () => {
             name="street"
             value={address.street}
             onChange={handleAddressChange}
-            className="form-input"
+            className="form-control"
           />
         </fieldset>
 
@@ -216,7 +216,7 @@ export const NewWishlist = () => {
             name="addressLine2"
             value={address.addressLine2}
             onChange={handleAddressChange}
-            className="form-input"
+            className="form-control"
           />
         </fieldset>
 
@@ -228,7 +228,7 @@ export const NewWishlist = () => {
             name="city"
             value={address.city}
             onChange={handleAddressChange}
-            className="form-input"
+            className="form-control"
           />
         </fieldset>
 
@@ -240,7 +240,7 @@ export const NewWishlist = () => {
             name="state"
             value={address.state}
             onChange={handleAddressChange}
-            className="form-input"
+            className="form-control"
           />
         </fieldset>
 
@@ -252,7 +252,7 @@ export const NewWishlist = () => {
             name="zip"
             value={address.zip}
             onChange={handleAddressChange}
-            className="form-input"
+            className="form-control"
           />
         </fieldset>
 

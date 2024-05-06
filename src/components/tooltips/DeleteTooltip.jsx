@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 export const DeleteTooltip = ({ tooltipText, handleDelete }) => {
   return (
     <span className="group relative">
-      <div className="absolute bottom-[calc(100%+0.5rem)] left-[66%] -translate-x-[50%] hidden group-hover:block w-auto">
+      <div className="absolute bottom-[calc(100%+0.5rem)] left-[70%] -translate-x-[50%] hidden group-hover:block w-auto">
         <div className="bottom-full right-0 rounded bg-black px-4 py-1 text-xs text-white whitespace-nowrap">
           {tooltipText}
           <svg
@@ -18,7 +18,7 @@ export const DeleteTooltip = ({ tooltipText, handleDelete }) => {
         </div>
       </div>
       <span onClick={handleDelete}>
-        <i className="fa-solid fa-trash hover:text-gray-400 cursor-pointer ml-4"></i>
+        <i className="fa-solid fa-trash ml-4 text-black"></i>
       </span>
     </span>
   );

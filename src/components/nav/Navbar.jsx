@@ -32,13 +32,13 @@ export const NavBar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-gray-300 py-4 z-30">
+    <nav className="fixed top-0 left-0 right-0 bg-white py-2 z-30 shadow-md">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-12">
           <div className="flex-shrink-0 flex items-center">
             <NavLink to={"/"}>
               <img
-                className="h-12 w-auto ml-2"
+                className="h-10 w-auto ml-2"
                 src="public/media/images/Wish_logo.png"
                 alt="WishLinker logo"
               />
@@ -51,7 +51,7 @@ export const NavBar = () => {
             {isDropdownOpen && (
               <div
                 ref={dropdownRef}
-                className="mr-2 p-7 text-left absolute top-20 right-0 bg-white border border-gray-200 rounded-md shadow-lg"
+                className="mr-2 p-7 text-left absolute top-16 right-0 bg-white border border-gray-200 rounded-md shadow-lg"
               >
                 <ul>
                   <li>
