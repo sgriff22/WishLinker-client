@@ -18,7 +18,7 @@ export const EditTooltip = ({ tooltipText }) => {
         </div>
       </div>
       <span>
-        <i className="fa-solid fa-pen-to-square hover:text-gray-400 cursor-pointer ml-4"></i>
+        <i className="fa-solid fa-pen-to-square ml-4 text-black"></i>
       </span>
     </span>
   );

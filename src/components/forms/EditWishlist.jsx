@@ -111,11 +111,13 @@ export const EditWishlist = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-8">
-      <form className="w-full bg-gray-100 shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 max-w-2xl">
+    <div className="flex justify-center items-center mt-4">
+      <form className="w-full bg-white shadow-md rounded-lg pt-4 pb-4 pl-12 pr-4 mb-4 max-w-2xl">
         <h1 className="text-center">Edit Wishlist</h1>
-        <fieldset className="mt-2 text-lg">
-          <label htmlFor="title">Title:</label>
+        <fieldset className="mt-2 text-lg text-left">
+          <label htmlFor="title" className="pink font-semibold">
+            Title:
+          </label>
           <input
             id="title"
             type="text"
@@ -124,8 +126,10 @@ export const EditWishlist = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </fieldset>
-        <fieldset className="mt-2 text-lg">
-          <label htmlFor="description">Description:</label>
+        <fieldset className="mt-3 text-lg text-left">
+          <label htmlFor="description" className="pink font-semibold">
+            Description:
+          </label>
           <textarea
             id="description"
             onChange={(e) => setDescription(e.target.value)}
@@ -135,62 +139,52 @@ export const EditWishlist = () => {
             cols="50"
           />
         </fieldset>
-        <fieldset className="mt-2 text-lg">
-          <label htmlFor="eventDate">Event Date (if applicable):</label>
-          <input
-            id="eventDate"
-            type="date"
-            onChange={(e) => setEventDate(e.target.value)}
-            value={eventDate}
-            className="form-control"
-          />
-        </fieldset>
+        <div className="flex justify-center -ml-8">
+          <fieldset className="mt-2 text-lg mr-8">
+            <label htmlFor="eventDate" className="pink font-semibold flex mt-3">
+              Event Date (if applicable):
+            </label>
+            <input
+              id="eventDate"
+              type="date"
+              onChange={(e) => setEventDate(e.target.value)}
+              value={eventDate}
+              className="form-control w-64"
+            />
+          </fieldset>
+          <fieldset className="mt-4 text-lg">
+            <div className="flex items-center">
+              <div className="mr-8">
+                <h3 className="pink">Private</h3>
+                <input
+                  id="yesPrivate"
+                  type="radio"
+                  name="private"
+                  value="true"
+                  checked={isPrivate}
+                  onChange={() => setIsPrivate(true)}
+                />
+              </div>
+              <div>
+                <h3 className="pink">Public</h3>
+                <input
+                  id="noPrivate"
+                  type="radio"
+                  name="private"
+                  value="false"
+                  checked={!isPrivate}
+                  onChange={() => setIsPrivate(false)}
+                />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <p className="pink text-left font-semibold mt-5">
+          Do You Want to be Surprised?
+        </p>
         <fieldset className="mt-2 text-lg">
           <div className="flex items-center">
             <div className="mr-8">
-              <h3 className="mb-2">Private</h3>
-              <input
-                id="yesPrivate"
-                type="radio"
-                name="private"
-                value="true"
-                checked={isPrivate}
-                onChange={() => setIsPrivate(true)}
-                className="mr-2"
-              />
-            </div>
-            <div>
-              <h3 className="mb-2">Public</h3>
-              <input
-                id="noPrivate"
-                type="radio"
-                name="private"
-                value="false"
-                checked={!isPrivate}
-                onChange={() => setIsPrivate(false)}
-                className="mr-2"
-              />
-            </div>
-          </div>
-        </fieldset>
-        <p>Do You Want to be Surprised?</p>
-        <fieldset className="mt-2 text-lg">
-          <div className="flex items-center">
-            <div className="mr-8">
-              <input
-                id="yesSpoil"
-                type="radio"
-                name="spoil"
-                value="true"
-                checked={spoil}
-                onChange={() => setSpoil(true)}
-                className="mr-2"
-              />
-              <label htmlFor="yesSpoil">
-                Yes, do not hide <br /> purchased items
-              </label>
-            </div>
-            <div>
               <input
                 id="noSpoil"
                 type="radio"
@@ -201,13 +195,29 @@ export const EditWishlist = () => {
                 className="mr-2"
               />
               <label htmlFor="noSpoil">
-                No, hide items <br /> once purchased
+                Yes, I want to be surprised <br /> do not hide purchased items
+              </label>
+            </div>
+            <div>
+              <input
+                id="yesSpoil"
+                type="radio"
+                name="spoil"
+                value="true"
+                checked={spoil}
+                onChange={() => setSpoil(true)}
+                className="mr-2"
+              />
+              <label htmlFor="yesSpoil">
+                No, spoil my surprises and <br /> hide items once purchased
               </label>
             </div>
           </div>
         </fieldset>
 
-        <p>Enter Mailing Address (optional)</p>
+        <p className="pink text-left font-semibold mt-5">
+          Enter Mailing Address (optional)
+        </p>
         <fieldset className="mt-2 text-lg">
           <label htmlFor="street">Street:</label>
           <input
@@ -216,7 +226,7 @@ export const EditWishlist = () => {
             name="street"
             value={address.street}
             onChange={handleAddressChange}
-            className="form-input"
+            className="form-control"
           />
         </fieldset>
 
@@ -228,7 +238,7 @@ export const EditWishlist = () => {
             name="addressLine2"
             value={address.addressLine2}
             onChange={handleAddressChange}
-            className="form-input"
+            className="form-control"
           />
         </fieldset>
 
@@ -240,7 +250,7 @@ export const EditWishlist = () => {
             name="city"
             value={address.city}
             onChange={handleAddressChange}
-            className="form-input"
+            className="form-control"
           />
         </fieldset>
 
@@ -252,7 +262,7 @@ export const EditWishlist = () => {
             name="state"
             value={address.state}
             onChange={handleAddressChange}
-            className="form-input"
+            className="form-control"
           />
         </fieldset>
 
@@ -264,7 +274,7 @@ export const EditWishlist = () => {
             name="zip"
             value={address.zip}
             onChange={handleAddressChange}
-            className="form-input"
+            className="form-control"
           />
         </fieldset>
 

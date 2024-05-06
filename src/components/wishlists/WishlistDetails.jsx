@@ -70,8 +70,8 @@ export const WishlistDetails = () => {
 
   return (
     <div>
-      <div className="flex justify-center">
-        <div className="pt-3">
+      <div className="flex justify-start">
+        <div className="flex justify-start w-1/4 pt-3 -mt-3">
           {profile.user?.id === wishlist.user?.id && (
             <>
               <Link to={`/wishlist/${wishlist.id}/editWishlist`}>
@@ -86,35 +86,46 @@ export const WishlistDetails = () => {
           )}
         </div>
 
-        <div className="w-3/4">
-          <h1>{wishlist.title}</h1>
-          <h2>
+        <div className="w-2/3 bg-white rounded-lg shadow-md p-6 mr-1">
+          <h1 className="text-2xl">{wishlist.title}</h1>
+          <h2 className="text-lg">
             {wishlist.user?.first_name} {wishlist.user?.last_name}
           </h2>
-          {eventDate && <h3>Event Date: {eventDate}</h3>}
-          <p>{wishlist.description}</p>
+          {eventDate && <h3 className="text-sm">Event Date: {eventDate}</h3>}
+          <p className="text-sm mt-4">{wishlist.description}</p>
 
           {wishlist.address && (
-            <div>
-              <p>Mailing Address</p>
-              <div>{formattedAddress}</div>
+            <div className="mt-4">
+              <p className="text-base font-semibold">Mailing Address</p>
+              <div className="text-sm">{formattedAddress}</div>
             </div>
           )}
         </div>
 
-        {profile.user?.id === wishlist.user?.id && (
-          <div className="pt-5 text-left text-sm">
-            <div className="border border-gray-500 bg-gray-200 px-5 py-5">
-              <div>Created On: {creationDate}</div>
-              <div>{wishlist.private ? "Private" : "Public"}</div>
-              <div>
-                Spoil Surprises: {wishlist.spoil_surprises ? "Yes" : "No"}
-              </div>
+        <div className="w-1/4 pt-4 text-left text-sm -mt-4">
+          {profile.user?.id === wishlist.user?.id && (
+            <div className="ml-auto w-48 bg-white px-5 py-4 rounded-lg shadow-md">
+              <p className="font-bold">
+                Created: <span className="font-light">{creationDate}</span>
+              </p>
+              <p className="font-bold">
+                Visibility:{" "}
+                <span className="font-light">
+                  {wishlist.private ? "Private" : "Public"}
+                </span>
+              </p>
+              <p className="font-bold">
+                Spoil Surprises:{" "}
+                <span className="font-light">
+                  {wishlist.spoil_surprises ? "Yes" : "No"}
+                </span>
+              </p>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-      <div className="item-left">
+
+      <div className="item-left mt-5">
         <FilterBar
           setWishlist={setWishlist}
           id={wishlist.id}
@@ -122,20 +133,30 @@ export const WishlistDetails = () => {
           currentUserId={profile.user?.id}
         />
       </div>
-      {wishlist.wishlist_items && wishlist.wishlist_items.length > 0 ? (
-        wishlist.wishlist_items.map((item) => (
-          <ItemCard
-            key={item.id}
-            item={item}
-            listUserId={wishlist.user?.id}
-            currentUserId={profile.user?.id}
-            currentUserFriends={profile?.friends}
-            setWishlist={setWishlist}
-          />
-        ))
-      ) : (
-        <p>No items in wishlist. Add items or adjust your filter.</p>
-      )}
+      <section className="text-gray-600">
+        <div className="mx-auto">
+          <div className="flex flex-wrap justify-start">
+            {wishlist.wishlist_items && wishlist.wishlist_items.length > 0 ? (
+              wishlist.wishlist_items.map((item) => (
+                <div key={item.id} className="p-4 md:w-1/3">
+                  <ItemCard
+                    item={item}
+                    listUserId={wishlist.user?.id}
+                    currentUserId={profile.user?.id}
+                    currentUserFriends={profile?.friends}
+                    setWishlist={setWishlist}
+                    spoilValue={wishlist.spoil_surprises}
+                  />
+                </div>
+              ))
+            ) : (
+              <p className="m-auto mt-5">
+                No items in wishlist. Add items or adjust your filter.
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

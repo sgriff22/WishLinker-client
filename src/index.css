@@ -6,20 +6,24 @@
   body {
     background-color: #f0f0f0;
     font-size: 1.5rem;
+    font-family: "Yeseva One", serif;
+    font-weight: 300;
   }
 
   h1 {
     font-size: 2.5rem;
+    color:#C15B75;
   }
 
   h2 {
     font-size: 2rem;
+    color:#e2a5b2;
   }
 
   button,
   button[type="button"] {
     font-size: 0.9rem;
-    background-color: gray;
+    background-color: #e2a5b2;
     color: white;
     border-radius: 5px;
     padding: 5px 10px;
@@ -29,11 +33,39 @@
   button[type="button"]:hover {
     font-size: 0.9rem;
     background-color: white;
-    color: gray;
-    border: 1px gray solid;
+    color: #e2a5b2;
+    border: 1px #e2a5b2 solid;
   }
 
   a:hover {
-    color: #9ca3af;
+    color: #e2a5b2;
+  }
+
+  i:hover {
+    color: #e2a5b2;
+    cursor: pointer;
+  }
+
+  p,
+  label,
+  input,
+  textarea {
+    font-family: "Josefin Sans", sans-serif;
+  }
+
+
+  input:focus,
+  textarea:hover {
+    outline: none;
+    border: solid #e2a5b2 2px;
+    color: #e2a5b2;
+  }
+
+  .rose {
+    color: #C15B75;
+  }
+
+  .pink {
+    color: #e2a5b2;
   }
 }

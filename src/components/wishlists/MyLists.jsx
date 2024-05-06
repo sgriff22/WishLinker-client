@@ -36,11 +36,11 @@ export const MyLists = () => {
         value={searchQuery}
         onChange={handleInputChange}
         placeholder="Search for wishlist..."
-        className="my-5 text-lg p-1 rounded-lg border border-gray-400"
+        className="my-5 text-lg px-2 pt-1 border rounded-md shadow-sm"
       />
       <div className="flex justify-between">
-        <div>
-          <h2 className="flex justify-between">
+        <div className="w-1/2 mr-20">
+          <h1 className="flex justify-between text-3xl mb-2">
             Private{" "}
             <span
               onClick={() =>
@@ -51,18 +51,18 @@ export const MyLists = () => {
             >
               <AddTooltip tooltipText={"Create New Wishlist"} />
             </span>
-          </h2>
+          </h1>
           {privateWishlists.map((list) => (
             <WishlistCard key={list.id} list={list} private={true} />
           ))}
         </div>
-        <div>
-          <h2 className="flex justify-between">
+        <div className="w-1/2">
+          <h1 className="flex justify-between text-3xl mb-2">
             Public{" "}
             <span onClick={() => navigate("/wishlist/newWishlist")}>
               <AddTooltip tooltipText={"Create New Wishlist"} />
             </span>
-          </h2>
+          </h1>
           {publicWishlists.map((list) => (
             <WishlistCard key={list.id} list={list} private={false} />
           ))}

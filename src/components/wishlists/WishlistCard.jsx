@@ -7,18 +7,10 @@ export const WishlistCard = ({ list }) => {
 
   return (
     <Link to={`/wishlist/${list.id}`}>
-      <div>
-        <div>
-          <div>
-            <div className="mb-5 h-full text-left flex border-gray-200 border p-4 rounded-lg bg-gray-100">
-              <div>
-                <h2>{list.title}</h2>
-                <p>{list.description}</p>
-                <p>{formatedDate}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="p-4 mb-5 h-32 text-left border-gray-200 border shadow-sm rounded-lg bg-white hover:shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1">
+        <h3 className="-mt-1">{list.title}</h3>
+        <p className="text-sm">{list.description}</p>
+        <p className="text-sm font-semibold">{formatedDate}</p>
       </div>
     </Link>
   );

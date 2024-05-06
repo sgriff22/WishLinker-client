@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export const UserCard = ({ user, buttonHandler }) => {
   return (
-    <div className="max-w-sm bg-white shadow-md rounded-lg overflow-hidden mx-auto flex items-center justify-between p-4 m-5">
+    <div className="max-w-sm bg-white shadow-md rounded-lg overflow-hidden mx-auto flex items-center justify-between p-4 m-5 hover:border-2 hover:border-rose-300 hover:shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1">
       <Link to={`/profile/${user.id}`} className="flex items-center">
         <img
           className="w-16 h-full object-cover object-center mr-4"

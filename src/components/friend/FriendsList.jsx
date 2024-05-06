@@ -66,54 +66,59 @@ export const FriendsList = () => {
 
   return (
     <div>
-      <h1>My Friends</h1>
-      <div>
-        <input
-          name="search"
-          type="text"
-          value={searchQuery}
-          placeholder="Search for item"
-          onChange={handleInputChange}
-          className="mb-5 mt-5 mr-5 text-lg p-1 rounded-lg border border-gray-400"
-        />
-        <button
-          onClick={() => {
-            navigate("/findFriend");
-          }}
-        >
-          Add New Friend
-        </button>
-        {profile.friends.map((f) => (
-          <FriendCardButton
-            key={f.friend_info.id}
-            friend={f}
-            buttonText={"Unfriend"}
-            buttonHandler={() =>
-              handleUnfriend(
-                f.id,
-                f.friend_info.first_name,
-                f.friend_info.last_name
-              )
-            }
+      <h1 className="mb-4">My Friends</h1>
+      <div className="flex justify-evenly">
+        <div className="w-2/4 mt-4">
+          <input
+            name="search"
+            type="text"
+            value={searchQuery}
+            placeholder="Search for item"
+            onChange={handleInputChange}
+            className="mr-5 text-lg px-2 pt-1 border rounded-md shadow-sm"
           />
-        ))}
-      </div>
-      <div>
-        <h2>Friend Requests</h2>
-        {profile.friend_requests.map((f) => (
-          <FriendCardButton
-            key={f.friend_info.id}
-            friend={f}
-            buttonText={"Accept"}
-            buttonHandler={() =>
-              handleAccept(
-                f.id,
-                f.friend_info.first_name,
-                f.friend_info.last_name
-              )
-            }
-          />
-        ))}
+          <button
+            onClick={() => {
+              navigate("/findFriend");
+            }}
+          >
+            Add New Friend
+          </button>
+
+          {profile.friends.map((f) => (
+            <FriendCardButton
+              key={f.friend_info.id}
+              friend={f}
+              buttonText={"Unfriend"}
+              buttonHandler={() =>
+                handleUnfriend(
+                  f.id,
+                  f.friend_info.first_name,
+                  f.friend_info.last_name
+                )
+              }
+            />
+          ))}
+        </div>
+        <div className="w-2/4 pt-4">
+          <div className="bg-gray-200 shadow-sm rounded-2xl p-4">
+            <h2>Friend Requests</h2>
+            {profile.friend_requests.map((f) => (
+              <FriendCardButton
+                key={f.friend_info.id}
+                friend={f}
+                buttonText={"Accept"}
+                buttonHandler={() =>
+                  handleAccept(
+                    f.id,
+                    f.friend_info.first_name,
+                    f.friend_info.last_name
+                  )
+                }
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
