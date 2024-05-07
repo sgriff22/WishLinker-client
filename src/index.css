@@ -3,6 +3,10 @@
 @import "tailwindcss/utilities";
 
 @layer base {
+  #root {
+    max-width: 1800px;
+  }
+
   body {
     background-color: #f0f0f0;
     font-size: 1.5rem;
@@ -12,12 +16,12 @@
 
   h1 {
     font-size: 2.5rem;
-    color:#C15B75;
+    color: #c15b75;
   }
 
   h2 {
     font-size: 2rem;
-    color:#e2a5b2;
+    color: #e2a5b2;
   }
 
   button,
@@ -49,23 +53,44 @@
   p,
   label,
   input,
-  textarea {
+  textarea,
+  select {
     font-family: "Josefin Sans", sans-serif;
   }
 
-
   input:focus,
-  textarea:hover {
+  textarea:focus,
+  select:focus {
     outline: none;
     border: solid #e2a5b2 2px;
     color: #e2a5b2;
   }
 
   .rose {
-    color: #C15B75;
+    color: #c15b75;
   }
 
   .pink {
     color: #e2a5b2;
   }
+
+  input[type="radio"] {
+    accent-color: #c15b75;
+  }
+
+  .form-button {
+    background-color: #c15b75;
+  }
+
+  .welcome-header {
+    color: #e19fae;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 400;
+    text-shadow: 2px 2px #c15b75;
+  }
+
+
 }
+
+
+

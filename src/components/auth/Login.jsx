@@ -22,7 +22,7 @@ export const Login = () => {
       .then((authInfo) => {
         if (authInfo.token) {
           localStorage.setItem("wish_token", JSON.stringify(authInfo));
-          navigate("/");
+          navigate("/home");
         } else {
           existDialog.current.showModal();
         }
@@ -42,7 +42,7 @@ export const Login = () => {
       </dialog>
 
       <section>
-        <form className="form--login border shadow-md" onSubmit={handleLogin}>
+        <form className="form--login border shadow-md bg-white rounded-lg" onSubmit={handleLogin}>
           <h1 className="text-center mt-7 mb-3">WishLinker</h1>
           <h2 className="text-xl mb-5 text-center">Please sign in</h2>
           <fieldset className="mb-4">
