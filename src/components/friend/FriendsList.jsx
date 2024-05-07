@@ -67,15 +67,15 @@ export const FriendsList = () => {
   return (
     <div>
       <h1 className="mb-4">My Friends</h1>
-      <div className="flex justify-evenly">
-        <div className="w-2/4 mt-4">
+      <div className="flex justify-center">
+        <div className="w-96 mt-4 mr-10">
           <input
             name="search"
             type="text"
             value={searchQuery}
             placeholder="Search for item"
             onChange={handleInputChange}
-            className="mr-5 text-lg px-2 pt-1 border rounded-md shadow-sm"
+            className="mr-5 text-lg px-2 pt-1 border rounded-md shadow-sm mb-3"
           />
           <button
             onClick={() => {
@@ -100,9 +100,9 @@ export const FriendsList = () => {
             />
           ))}
         </div>
-        <div className="w-2/4 pt-4">
+        <div className="w-96 pt-4 -mt-1">
           <div className="bg-gray-200 shadow-sm rounded-2xl p-4">
-            <h2>Friend Requests</h2>
+            <h2 className="-mt-2 rose">Friend Requests</h2>
             {profile.friend_requests.map((f) => (
               <FriendCardButton
                 key={f.friend_info.id}

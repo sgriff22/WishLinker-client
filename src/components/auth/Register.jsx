@@ -29,7 +29,7 @@ export const Register = () => {
       .then((authInfo) => {
         if (authInfo && authInfo.token) {
           localStorage.setItem("wish_token", JSON.stringify(authInfo));
-          navigate("/");
+          navigate("/home");
         } else {
           existDialog.current.showModal();
         }
@@ -50,7 +50,7 @@ export const Register = () => {
 
       <section>
         <form
-          className="form--login border shadow-md"
+          className="form--login border shadow-md bg-white rounded-lg"
           onSubmit={handleRegister}
         >
           <h1 className="text-center text-4xl mt-7 mb-3">WishLinker</h1>

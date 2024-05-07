@@ -11,7 +11,7 @@ export const NavBar = () => {
     localStorage.removeItem("wish_token");
 
     // Navigate to the login page
-    navigate("/login");
+    navigate("/");
   };
 
   const toggleDropdown = () => {
@@ -36,7 +36,7 @@ export const NavBar = () => {
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-12">
           <div className="flex-shrink-0 flex items-center">
-            <NavLink to={"/"}>
+            <NavLink to={"/home"}>
               <img
                 className="h-10 w-auto ml-2"
                 src="public/media/images/Wish_logo.png"
@@ -45,9 +45,20 @@ export const NavBar = () => {
             </NavLink>
           </div>
           <div>
-            <button onClick={toggleDropdown} className="mr-2">
-              <i className="fa-solid fa-user"></i>
-            </button>
+            {!localStorage.getItem("wish_token") ? (
+              <button
+                onClick={() => {
+                  navigate("/login");
+                }}
+                className="mr-2"
+              >
+                Login
+              </button>
+            ) : (
+              <button onClick={toggleDropdown} className="mr-2">
+                <i className="fa-solid fa-user"></i>
+              </button>
+            )}
             {isDropdownOpen && (
               <div
                 ref={dropdownRef}

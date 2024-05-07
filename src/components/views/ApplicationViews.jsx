@@ -13,14 +13,24 @@ import { SearchFriend } from "../friend/SearchFriend.jsx";
 import { EditWishlist } from "../forms/EditWishlist.jsx";
 import { NewItem } from "../forms/NewItem.jsx";
 import { EditItem } from "../forms/EditItem.jsx";
+import { NavBar } from "../nav/Navbar.jsx";
+import { Homepage } from "../welcome/Homepage.jsx";
+
+const NavbarWithWelcome = () => (
+  <>
+    <NavBar />
+    <Welcome />
+  </>
+);
 
 export const ApplicationViews = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/" element={<NavbarWithWelcome />} />
       <Route element={<Authorized />}>
-        <Route path="/" element={<Welcome />} />
+        <Route path="/home" element={<Homepage />} />
         <Route path="myLists" element={<MyLists />} />
         <Route path="wishlist">
           <Route path=":listId">

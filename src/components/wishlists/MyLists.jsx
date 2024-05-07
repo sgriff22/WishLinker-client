@@ -38,7 +38,7 @@ export const MyLists = () => {
         placeholder="Search for wishlist..."
         className="my-5 text-lg px-2 pt-1 border rounded-md shadow-sm"
       />
-      <div className="flex justify-between">
+      <div className="flex justify-between sm:px-0 md:px-0 lg:px-32">
         <div className="w-1/2 mr-20">
           <h1 className="flex justify-between text-3xl mb-2">
             Private{" "}
