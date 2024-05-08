@@ -16,3 +16,14 @@ export function getProfileByUserId(userId) {
     },
   });
 }
+
+export function createProfile(profile) {
+  return fetchWithResponse("profile", {
+    method: "POST",
+    headers: {
+      Authorization: getToken(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(profile),
+  });
+}

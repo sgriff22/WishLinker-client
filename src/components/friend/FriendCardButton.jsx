@@ -8,11 +8,19 @@ export const FriendCardButton = ({ friend, buttonText, buttonHandler }) => {
         to={`/profile/${friend.friend_info.id}`}
         className="flex items-center"
       >
-        <img
-          className="w-16 h-full object-cover object-center mr-4"
-          src="/public/media/images/Wish_logo.png"
-          alt="Friend Image"
-        />
+        {friend.friend_info.profile.image ? (
+          <img
+            className="w-16 h-16 object-contain object-center overflow-hidden mr-4"
+            src={friend.friend_info.profile.image}
+            alt={`Image of ${friend.friend_info.first_name} ${friend.friend_info.last_name}`}
+          />
+        ) : (
+          <img
+            className="w-16 h-auto object-cover object-center overflow-hidden mr-4"
+            src="/public/media/images/Wish_logo.png"
+            alt="Logo"
+          />
+        )}
         <div className="flex-grow">
           <h1 className="text-gray-900 font-semibold text-lg text-left">
             {friend.friend_info.first_name} {friend.friend_info.last_name}
@@ -37,6 +45,9 @@ FriendCardButton.propTypes = {
       first_name: PropTypes.string,
       last_name: PropTypes.string,
       username: PropTypes.string,
+      profile: PropTypes.shape({
+        image: PropTypes.string,
+      }),
     }),
   }),
   buttonText: PropTypes.string,
