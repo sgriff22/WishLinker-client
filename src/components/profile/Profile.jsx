@@ -20,6 +20,15 @@ export const Profile = () => {
 
   return (
     <div className="grid grid-cols-3 gap-2">
+      {profile.profile.image && (
+        <div className="h-48 w-36 ml-2 mb-5">
+          <img
+            className="h-auto w-auto object-contain object-center overflow-hidden rounded-xl"
+            src={profile.profile.image}
+            alt={`Image of ${profile.user.first_name} ${profile.user.last_name}`}
+          />
+        </div>
+      )}
       <h1 className="col-span-3 text-left -mb-3 ml-2 text-6xl mt-32">
         {profile.user.first_name} {profile.user.last_name}
       </h1>

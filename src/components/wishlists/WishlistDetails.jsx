@@ -69,7 +69,7 @@ export const WishlistDetails = () => {
   };
 
   return (
-    <div>
+    <div className="mx-40">
       <div className="flex justify-start">
         <div className="flex justify-start w-1/4 pt-3 -mt-3">
           {profile.user?.id === wishlist.user?.id && (
