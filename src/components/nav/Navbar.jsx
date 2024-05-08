@@ -89,11 +89,23 @@ export const NavBar = () => {
                   <li>
                     <NavLink to={"/purchases"}>MyPurchases</NavLink>
                   </li>
+                  {Object.keys(profile.profile).length === 0 ? (
+                    <li>
+                      <NavLink to={"/profile/personalize"}>
+                        Personalize Profile
+                      </NavLink>
+                    </li>
+                  ) : (
+                    <li>
+                      <NavLink to={"/profile"}>Profile</NavLink>
+                    </li>
+                  )}
+
                   <li>
-                    <NavLink to={"/profile"}>Profile</NavLink>
-                  </li>
-                  <li>
-                    <button onClick={handleLogout} className="mt-3 font-semibold">
+                    <button
+                      onClick={handleLogout}
+                      className="mt-3 font-semibold"
+                    >
                       Logout
                     </button>
                   </li>

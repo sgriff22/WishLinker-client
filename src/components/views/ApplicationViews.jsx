@@ -16,6 +16,7 @@ import { EditItem } from "../forms/EditItem.jsx";
 import { NavBar } from "../nav/Navbar.jsx";
 import { Homepage } from "../welcome/Homepage.jsx";
 import { Purchases } from "../purchases/Purchases.jsx";
+import { ProfileForm } from "../forms/ProfileForm.jsx";
 
 const NavbarWithWelcome = () => (
   <>
@@ -45,6 +46,7 @@ export const ApplicationViews = () => {
         <Route path="profile">
           <Route index element={<MyProfile />} />
           <Route path=":userId" element={<Profile />} />
+          <Route path="personalize" element={<ProfileForm />} />
         </Route>
         <Route path="friends" element={<FriendsList />} />
         <Route path="findFriend" element={<SearchFriend />} />
