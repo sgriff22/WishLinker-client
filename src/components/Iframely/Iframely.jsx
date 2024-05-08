@@ -50,7 +50,7 @@ const Iframely = ({ url }) => {
   }, [url]);
 
   if (isLoading) {
-    return <div>Loading...</div>; // Add a loading spinner or progress bar for better UX
+    return <div>Loading...</div>; 
   }
 
   if (error) {
@@ -58,7 +58,7 @@ const Iframely = ({ url }) => {
       <img
         src="/media/images/not_image.png"
         alt="Placeholder"
-        className="lg:h-48 md:h-36 w-full object-contain object-center bg-white"
+        className="lg:h-40 md:h-32 sm:h-24 w-full object-contain object-center bg-white"
       />
     );
   }
@@ -69,7 +69,7 @@ const Iframely = ({ url }) => {
         <img
           src={imageUrl}
           alt="Thumbnail"
-          className="lg:h-48 md:h-36 w-full object-cover object-center bg-white"
+          className="lg:h-40 md:h-32 sm:h-24 w-full object-cover object-center bg-white"
         />
       )}
     </div>

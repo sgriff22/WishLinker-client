@@ -87,12 +87,12 @@ export const WishlistDetails = () => {
         </div>
 
         <div className="w-2/3 bg-white rounded-lg shadow-md p-6 mr-1">
-          <h1 className="text-2xl">{wishlist.title}</h1>
-          <h2 className="text-lg">
+          <h2 className="rose -mb2">{wishlist.title}</h2>
+          <h2 className="text-2xl">
             {wishlist.user?.first_name} {wishlist.user?.last_name}
           </h2>
-          {eventDate && <h3 className="text-sm">Event Date: {eventDate}</h3>}
-          <p className="text-sm mt-4">{wishlist.description}</p>
+          {eventDate && <h3 className="text-lg mt-1">Event Date: {eventDate}</h3>}
+          <p className="text-lg mt-2">{wishlist.description}</p>
 
           {wishlist.address && (
             <div className="mt-4">
@@ -135,10 +135,10 @@ export const WishlistDetails = () => {
       </div>
       <section className="text-gray-600">
         <div className="mx-auto">
-          <div className="flex flex-wrap justify-start">
+          <div className="flex flex-wrap justify-center">
             {wishlist.wishlist_items && wishlist.wishlist_items.length > 0 ? (
               wishlist.wishlist_items.map((item) => (
-                <div key={item.id} className="p-4 md:w-1/3">
+                <div key={item.id} className=" md:w-1/3">
                   <ItemCard
                     item={item}
                     listUserId={wishlist.user?.id}

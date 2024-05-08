@@ -1,13 +1,17 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { apiUrl } from "../../utils";
+import { getCurrentUserProfile } from "../services/profile";
+import AppContext from "../../context/AppContext";
 
 export const Login = () => {
   const [username, setUsername] = useState("ryan@ryantanay.com");
   const [password, setPassword] = useState("tanay");
   const existDialog = useRef();
   const navigate = useNavigate();
+
+  const { setProfile } = useContext(AppContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -22,7 +26,10 @@ export const Login = () => {
       .then((authInfo) => {
         if (authInfo.token) {
           localStorage.setItem("wish_token", JSON.stringify(authInfo));
-          navigate("/home");
+          getCurrentUserProfile().then((res) => {
+            setProfile(res);
+            navigate("/home");
+          });
         } else {
           existDialog.current.showModal();
         }
@@ -42,7 +49,10 @@ export const Login = () => {
       </dialog>
 
       <section>
-        <form className="form--login border shadow-md bg-white rounded-lg" onSubmit={handleLogin}>
+        <form
+          className="form--login border shadow-md bg-white rounded-lg"
+          onSubmit={handleLogin}
+        >
           <h1 className="text-center mt-7 mb-3">WishLinker</h1>
           <h2 className="text-xl mb-5 text-center">Please sign in</h2>
           <fieldset className="mb-4">

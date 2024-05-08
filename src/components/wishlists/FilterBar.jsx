@@ -56,7 +56,7 @@ export const FilterBar = ({ setWishlist, id, listUserId, currentUserId }) => {
 
       {currentUserId !== listUserId && (
         <select
-          className="w-55 text-lg p-1"
+          className="w-55 text-lg px-2 pb-1 pt-2 border rounded-md shadow-sm text-gray-400"
           value={selectedPriority}
           name="priority"
           onChange={handlePriorityChange}

@@ -15,6 +15,7 @@ import { NewItem } from "../forms/NewItem.jsx";
 import { EditItem } from "../forms/EditItem.jsx";
 import { NavBar } from "../nav/Navbar.jsx";
 import { Homepage } from "../welcome/Homepage.jsx";
+import { Purchases } from "../purchases/Purchases.jsx";
 
 const NavbarWithWelcome = () => (
   <>
@@ -30,7 +31,7 @@ export const ApplicationViews = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<NavbarWithWelcome />} />
       <Route element={<Authorized />}>
-        <Route path="/home" element={<Homepage />} />
+        <Route path="home" element={<Homepage />} />
         <Route path="myLists" element={<MyLists />} />
         <Route path="wishlist">
           <Route path=":listId">
@@ -47,6 +48,7 @@ export const ApplicationViews = () => {
         </Route>
         <Route path="friends" element={<FriendsList />} />
         <Route path="findFriend" element={<SearchFriend />} />
+        <Route path="purchases" element={<Purchases />} />
       </Route>
     </Routes>
   );
