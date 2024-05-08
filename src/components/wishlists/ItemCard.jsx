@@ -6,6 +6,7 @@ import { PurchasedTooltip } from "../tooltips/PurchasedTooltip";
 import { getWishlistById } from "../services/wishlist";
 import { deleteItem } from "../services/items";
 import Iframely from "../Iframely/Iframely";
+import { createPurchase } from "../services/purchases";
 
 export const ItemCard = ({
   item,
@@ -59,7 +60,40 @@ export const ItemCard = ({
   };
 
   const handlePurchase = () => {
-    console.log("purchased");
+    const isConfirmed = window.confirm(`Did you purchase ${item.name}?`);
+
+    if (isConfirmed) {
+      let purchasedQuantity = window.prompt(
+        `How many ${item.name}'s did you purchase?`
+      );
+
+      // Convert the input to an integer
+      purchasedQuantity = parseInt(purchasedQuantity);
+
+      // Check if the input is a valid number and greater than 0
+      if (!isNaN(purchasedQuantity) && purchasedQuantity > 0) {
+        const isQuantityConfirmed = window.confirm(
+          `Confirm: You purchased ${purchasedQuantity} ${item.name}(s)?`
+        );
+
+        if (isQuantityConfirmed) {
+          const purchase = {
+            wishlist_item: item.id,
+            quantity: purchasedQuantity,
+          };
+          createPurchase(purchase).then(() => {
+            getWishlistById(item.wishlist).then((res) => {
+              window.alert(`Purchased`);
+              setWishlist(res);
+            });
+          });
+        } else {
+          window.alert("Purchase canceled.");
+        }
+      } else {
+        window.alert("Please enter a valid quantity.");
+      }
+    }
   };
 
   return (

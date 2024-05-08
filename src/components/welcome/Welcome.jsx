@@ -35,21 +35,15 @@ export const Welcome = () => {
             alt="WishLinker logo"
           />
           <div className="flex justify-center mb-5">
-            <div className="flex flex-wrap justify-center mr-4">
-              <h1 className="text-sm w-full text-black">Have an account?</h1>
-              <button
-                onClick={() => {
-                  navigate("/login");
-                }}
-              >
-                Login
-              </button>
-            </div>
             <div className="flex flex-wrap justify-center">
               <h1 className="text-sm w-full text-black">New Here?</h1>
-              <button onClick={() => {
+              <button
+                onClick={() => {
                   navigate("/register");
-                }}>Register</button>
+                }}
+              >
+                Register
+              </button>
             </div>
           </div>
           <div className="mb-2">
