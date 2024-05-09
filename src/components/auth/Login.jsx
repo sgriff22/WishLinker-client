@@ -53,8 +53,8 @@ export const Login = () => {
           className="form--login border shadow-md bg-white rounded-lg"
           onSubmit={handleLogin}
         >
-          <h1 className="text-center mt-7 mb-3">WishLinker</h1>
-          <h2 className="text-xl mb-5 text-center">Please sign in</h2>
+          <h1 className="text-center mt-7">WishLinker</h1>
+          <h2 className="text-xl mb-2 text-center">Please sign in</h2>
           <fieldset className="mb-4">
             <label htmlFor="inputUsername"> Username </label>
             <input
@@ -79,8 +79,8 @@ export const Login = () => {
               placeholder="Password"
             />
           </fieldset>
-          <fieldset>
-            <button className="button">Sign in</button>
+          <fieldset className="text-right">
+            <button>Sign in</button>
           </fieldset>
           <div className="loginLinks">
             <section className="link--register">

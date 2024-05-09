@@ -36,7 +36,7 @@ export const Welcome = () => {
           />
           <div className="flex justify-center mb-5">
             <div className="flex flex-wrap justify-center">
-              <h1 className="text-sm w-full text-black">New Here?</h1>
+              <h1 className="text-sm w-full rose">New Here?</h1>
               <button
                 onClick={() => {
                   navigate("/register");

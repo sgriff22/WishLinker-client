@@ -40,9 +40,9 @@ export const Calendar = ({ events, onDateClick }) => {
         (event) => event.date.toDateString() === currentDay.toDateString()
       );
 
-      const dayClass = `w-8 h-8 text-lg flex items-center justify-center rounded-lg hover:pink-bg hover:text-white  ${
-        isCurrentDate || eventForDate ? "form-button text-white" : ""
-      } cursor-pointer`;
+      const dayClass = `w-8 h-8 text-lg flex items-center justify-center rounded-lg hover:pink-bg hover:text-white ${
+        isCurrentDate ? "pink" : ""
+      } ${eventForDate ? "form-button text-white" : ""} cursor-pointer`;
 
       days.push(
         <div
