@@ -2,9 +2,23 @@
 import { useContext } from "react";
 import AppContext from "../../context/AppContext";
 import { MiniCalendar } from "./MiniCalendar";
+import { WishlistCard } from "../wishlists/WishlistCard";
+import { updateWishlist } from "../services/wishlist";
+import { getCurrentUserProfile } from "../services/profile";
 
 export const Homepage = () => {
-  const { profile } = useContext(AppContext);
+  const { profile, setProfile } = useContext(AppContext);
+
+  const handleMyUnpin = (listId, list) => {
+    const updatedWishlist = { ...list };
+    updatedWishlist.pinned = false;
+
+    updateWishlist(listId, updatedWishlist).then(() => {
+      getCurrentUserProfile().then((res) => {
+        setProfile(res);
+      });
+    });
+  };
 
   if (!profile || !profile.user) {
     return <div>Loading...</div>;
@@ -19,8 +33,23 @@ export const Homepage = () => {
         <div className="w-full bg-gray-300 pt-2 pb-7 px-5 rounded-lg mb-5">
           <h2>Pinned Wishlists</h2>
           <div className="flex justify-center">
-            <div className="w-2/3 bg-white mr-10 rounded-lg">
+            <div className="w-2/3 bg-white mr-10 px-5 rounded-lg">
               <h3 className="rose">Mine</h3>
+              {profile.my_pinned_lists.map((p) => (
+                <div key={p.id}>
+                  <div className="text-right">
+                    <button
+                      className="text-xs hover:text-xs"
+                      onClick={() => {
+                        handleMyUnpin(p.id, p);
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                  <WishlistCard list={p} />
+                </div>
+              ))}
             </div>
             <div className="w-2/3 bg-white rounded-lg">
               <h3 className="rose">My Friends</h3>
