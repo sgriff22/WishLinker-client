@@ -1,20 +1,26 @@
 import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { deleteWishlist, getWishlistById } from "../services/wishlist";
+import {
+  deleteWishlist,
+  getWishlistById,
+  updateWishlist,
+} from "../services/wishlist";
 import { formatDate } from "../../utils";
 import { ItemCard } from "./ItemCard";
 import { FilterBar } from "./FilterBar";
 import AppContext from "../../context/AppContext";
 import { EditTooltip } from "../tooltips/EditTooltip";
 import { DeleteTooltip } from "../tooltips/DeleteTooltip";
+import { PinTooltip } from "../tooltips/PinTooltip";
+import { getCurrentUserProfile } from "../services/profile";
 
 export const WishlistDetails = () => {
   const [wishlist, setWishlist] = useState({});
   const { listId } = useParams();
   const eventDate = formatDate(wishlist.date_of_event);
   const [formattedAddress, setFormattedAddress] = useState("");
-  const { profile } = useContext(AppContext);
+  const { profile, setProfile } = useContext(AppContext);
 
   const creationDate = formatDate(wishlist.creation_date);
 
@@ -68,6 +74,21 @@ export const WishlistDetails = () => {
     }
   };
 
+  const handlePin = () => {
+    const updatedWishlist = { ...wishlist };
+    updatedWishlist.pinned = true;
+
+    updateWishlist(listId, updatedWishlist).then(() => {
+      getWishlistById(listId).then((res) => {
+        setWishlist(res);
+        window.alert("Pinned to homepage");
+        getCurrentUserProfile().then((res) => {
+          setProfile(res);
+        });
+      });
+    });
+  };
+
   return (
     <div className="mx-40">
       <div className="flex justify-start">
@@ -77,6 +98,13 @@ export const WishlistDetails = () => {
               <Link to={`/wishlist/${wishlist.id}/editWishlist`}>
                 <EditTooltip tooltipText={"Edit Wishlist"} />
               </Link>
+
+              {!wishlist.pinned && (
+                <PinTooltip
+                  tooltipText={"Pin to Homepage"}
+                  handlePin={handlePin}
+                />
+              )}
 
               <DeleteTooltip
                 tooltipText={"Delete Wishlist"}
@@ -91,7 +119,9 @@ export const WishlistDetails = () => {
           <h2 className="text-2xl">
             {wishlist.user?.first_name} {wishlist.user?.last_name}
           </h2>
-          {eventDate && <h3 className="text-lg mt-1">Event Date: {eventDate}</h3>}
+          {eventDate && (
+            <h3 className="text-lg mt-1">Event Date: {eventDate}</h3>
+          )}
           <p className="text-lg mt-2">{wishlist.description}</p>
 
           {wishlist.address && (
