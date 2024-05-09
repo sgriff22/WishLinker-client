@@ -142,7 +142,7 @@ export const EditItem = () => {
             value={item.note}
             name="note"
             className="form-control block h-20"
-            maxLength={50}
+            maxLength={100}
             onChange={handleChange}
           />
         </fieldset>

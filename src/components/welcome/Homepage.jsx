@@ -1,13 +1,21 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppContext from "../../context/AppContext";
 import { MiniCalendar } from "./MiniCalendar";
 import { WishlistCard } from "../wishlists/WishlistCard";
 import { updateWishlist } from "../services/wishlist";
 import { getCurrentUserProfile } from "../services/profile";
+import { deletePin, getUsersPins } from "../services/pin";
 
 export const Homepage = () => {
   const { profile, setProfile } = useContext(AppContext);
+  const [pins, setPins] = useState([]);
+
+  useEffect(() => {
+    getUsersPins().then((res) => {
+      setPins(res);
+    });
+  }, []);
 
   const handleMyUnpin = (listId, list) => {
     const updatedWishlist = { ...list };
@@ -16,6 +24,14 @@ export const Homepage = () => {
     updateWishlist(listId, updatedWishlist).then(() => {
       getCurrentUserProfile().then((res) => {
         setProfile(res);
+      });
+    });
+  };
+
+  const handleFriendUnpin = (pinId) => {
+    deletePin(pinId).then(() => {
+      getUsersPins().then((res) => {
+        setPins(res);
       });
     });
   };
@@ -53,6 +69,21 @@ export const Homepage = () => {
             </div>
             <div className="w-2/3 bg-white rounded-lg">
               <h3 className="rose">My Friends</h3>
+              {pins.map((p) => (
+                <div key={p.id}>
+                  <div className="text-right">
+                    <button
+                      className="text-xs hover:text-xs"
+                      onClick={() => {
+                        handleFriendUnpin(p.id);
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                  <WishlistCard list={p.wishlist} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
