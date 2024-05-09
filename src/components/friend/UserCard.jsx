@@ -3,6 +3,22 @@ import PropTypes from "prop-types";
 import { apiUrl } from "../../utils";
 
 export const UserCard = ({ user, buttonHandler }) => {
+  const getFriendRequestStatus = (user) => {
+    if (user.friend_request_sent) {
+      return <p className="text-sm rose">Request Sent</p>;
+    } else if (user.friend_request_received) {
+      return <p className="text-sm rose">Request Received</p>;
+    } else {
+      return (
+        <button className="p-2" onClick={buttonHandler}>
+          Add Friend
+        </button>
+      );
+    }
+  };
+
+  const friendRequestStatus = getFriendRequestStatus(user);
+
   return (
     <div className="max-w-sm bg-white shadow-md rounded-lg overflow-hidden mx-auto flex items-center justify-between p-4 m-5 hover:border-2 hover:border-rose-300 hover:shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1">
       <Link to={`/profile/${user.id}`} className="flex items-center">
@@ -26,13 +42,7 @@ export const UserCard = ({ user, buttonHandler }) => {
           <p className="text-gray-600 text-left text-lg">{user.username}</p>
         </div>
       </Link>
-      {user.friend_request_sent ? (
-        <p>Friend request sent</p>
-      ) : (
-        <button className="p-2" onClick={buttonHandler}>
-          Add Friend
-        </button>
-      )}
+      {friendRequestStatus}
     </div>
   );
 };
@@ -44,6 +54,7 @@ UserCard.propTypes = {
     last_name: PropTypes.string,
     username: PropTypes.string,
     friend_request_sent: PropTypes.bool,
+    friend_request_received: PropTypes.bool,
     profile: PropTypes.shape({
       image: PropTypes.string,
     }),

@@ -103,7 +103,7 @@ export const FriendsList = () => {
         <div className="w-96 pt-4 -mt-1">
           <div className="bg-gray-200 shadow-sm rounded-2xl p-4">
             <h2 className="-mt-2 rose">Friend Requests</h2>
-            {profile.friend_requests.map((f) => (
+            {profile.received_requests.map((f) => (
               <FriendCardButton
                 key={f.friend_info.id}
                 friend={f}

@@ -111,7 +111,7 @@ export const EditWishlist = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-4">
+    <div className="flex justify-center items-center mb-8">
       <form className="w-full bg-white shadow-md p-10 rounded-lg  max-w-2xl text-left">
         <h1 className="text-center -mt-2">Edit Wishlist</h1>
         <fieldset className="mt-2 text-lg flex flex-wrap justify-center">
