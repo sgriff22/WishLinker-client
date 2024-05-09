@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { createProfile } from "../services/profile";
+import { useContext, useState } from "react";
+import { createProfile, getCurrentUserProfile } from "../services/profile";
 import { useNavigate } from "react-router-dom";
+import AppContext from "../../context/AppContext";
 
 export const ProfileForm = () => {
   const [bio, setBio] = useState("");
@@ -14,6 +15,8 @@ export const ProfileForm = () => {
     zip: "",
   });
   const [imagePreview, setImagePreview] = useState(null);
+
+  const { setProfile } = useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -29,8 +32,11 @@ export const ProfileForm = () => {
       image: image,
     };
 
-    createProfile(newProfile).then((res) => {
-      navigate(`/profile/${res.user}`);
+    createProfile(newProfile).then(() => {
+      getCurrentUserProfile().then((res) => {
+        setProfile(res);
+        navigate(`/profile`);
+      });
     });
   };
 

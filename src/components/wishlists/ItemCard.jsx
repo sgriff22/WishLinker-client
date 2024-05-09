@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { EditTooltip } from "../tooltips/EditTooltip";
 import { DeleteTooltip } from "../tooltips/DeleteTooltip";
 import { PurchasedTooltip } from "../tooltips/PurchasedTooltip";
@@ -20,6 +20,8 @@ export const ItemCard = ({
   const isUserAFriend = currentUserFriends?.some(
     (friend) => friend.friend_info.id === listUserId
   );
+
+  const {listId} = useParams()
 
   const handleDelete = () => {
     // Display confirmation dialog
@@ -100,7 +102,7 @@ export const ItemCard = ({
     <div className="flex flex-wrap justify-end w-64">
       {listUserId === currentUserId && (
         <div>
-          <Link to={`/wishlist/1/editItem/${item.id}`}>
+          <Link to={`/wishlist/${listId}/editItem/${item.id}`}>
             <EditTooltip tooltipText={"Edit Item"} />
           </Link>
 

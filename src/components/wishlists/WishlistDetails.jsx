@@ -14,6 +14,7 @@ import { EditTooltip } from "../tooltips/EditTooltip";
 import { DeleteTooltip } from "../tooltips/DeleteTooltip";
 import { PinTooltip } from "../tooltips/PinTooltip";
 import { getCurrentUserProfile } from "../services/profile";
+import { createPin } from "../services/pin";
 
 export const WishlistDetails = () => {
   const [wishlist, setWishlist] = useState({});
@@ -89,6 +90,20 @@ export const WishlistDetails = () => {
     });
   };
 
+  const handleFriendPin = () => {
+    const newPin = {
+      wishlist: listId,
+    };
+
+    createPin(newPin).then((res) => {
+      console.log(res);
+      //refresh the page and remove pin icon after creation
+      getCurrentUserProfile().then((res) => {
+        setProfile(res);
+      });
+    });
+  };
+
   return (
     <div className="mx-40">
       <div className="flex justify-start">
@@ -111,6 +126,13 @@ export const WishlistDetails = () => {
                 handleDelete={handleDelete}
               />
             </>
+          )}
+
+          {profile.user?.id !== wishlist.user?.id && (
+            <PinTooltip
+              tooltipText={"Pin to Homepage"}
+              handlePin={handleFriendPin}
+            />
           )}
         </div>
 
