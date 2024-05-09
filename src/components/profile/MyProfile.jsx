@@ -61,12 +61,12 @@ export const MyProfile = () => {
                 <h1 className="text-left ml-2 text-6xl">
                   {profile.user.first_name} {profile.user.last_name}
                 </h1>
-                <h2 className="text-left ml-2 text-2xl mt-2">
+                <h2 className="text-left ml-2 text-xl mt-2">
                   {profile.user.username}
                 </h2>
               </div>
 
-              <div className="flex justify-end col-span-2">
+              <div className="flex justify-end col-span-2 ml-2">
                 <div className="form-button text-white flex rounded-lg pl-1 pr-2 py-2">
                   <div className="ml-2">
                     <p className="text-lg font-semibold">Birthday</p>
