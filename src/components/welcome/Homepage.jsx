@@ -32,6 +32,9 @@ export const Homepage = () => {
     deletePin(pinId).then(() => {
       getUsersPins().then((res) => {
         setPins(res);
+        getCurrentUserProfile().then((res) => {
+          setProfile(res);
+        });
       });
     });
   };
