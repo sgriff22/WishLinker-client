@@ -52,7 +52,7 @@ export const Homepage = () => {
         <div className="w-full bg-gray-300 pt-2 pb-7 px-5 rounded-lg mb-5">
           <h2>Pinned Wishlists</h2>
           <div className="flex justify-center">
-            <div className="w-2/3 bg-white mr-10 px-5 rounded-lg">
+            <div className="w-2/3 bg-white mr-10 px-10 py-5 rounded-lg">
               <h3 className="rose">Mine</h3>
               {profile.my_pinned_lists.map((p) => (
                 <div key={p.id}>
@@ -70,7 +70,7 @@ export const Homepage = () => {
                 </div>
               ))}
             </div>
-            <div className="w-2/3 bg-white rounded-lg">
+            <div className="w-2/3 bg-white rounded-lg px-10 py-5">
               <h3 className="rose">My Friends</h3>
               {pins.map((p) => (
                 <div key={p.id}>

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getProfileByUserId } from "../services/profile";
+import { getCurrentUserProfile, getProfileByUserId } from "../services/profile";
 import { WishlistCard } from "../wishlists/WishlistCard";
 import { FriendCard } from "../friend/FriendCard";
 import { formatDate } from "../../utils";
@@ -16,7 +16,7 @@ export const Profile = () => {
   const [request, setRequest] = useState(false);
   const [receivedRequest, setReceivedRequest] = useState(false);
 
-  const { profile } = useContext(AppContext);
+  const { profile, setProfile } = useContext(AppContext);
 
   useEffect(() => {
     getProfileByUserId(userId).then((res) => {
@@ -90,6 +90,9 @@ export const Profile = () => {
     addFriend(userId).then(() => {
       getProfileByUserId(userId).then((res) => {
         setUserProfile(res);
+        getCurrentUserProfile().then((res) => {
+          setProfile(res);
+        });
       });
     });
   };

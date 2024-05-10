@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { addFriend, getFilteredUsers, getUsers } from "../services/friends";
 import { UserCard } from "./UserCard";
+import AppContext from "../../context/AppContext";
+import { getCurrentUserProfile } from "../services/profile";
 
 export const SearchFriend = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const { setProfile } = useContext(AppContext);
 
   useEffect(() => {
     getUsers().then((res) => {
@@ -37,6 +41,9 @@ export const SearchFriend = () => {
     addFriend(userId).then(() => {
       getUsers().then((res) => {
         setUsers(res);
+        getCurrentUserProfile().then((res) => {
+          setProfile(res);
+        });
       });
     });
   };

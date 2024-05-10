@@ -212,7 +212,7 @@ export const WishlistDetails = () => {
           <div className="flex flex-wrap justify-center">
             {wishlist.wishlist_items && wishlist.wishlist_items.length > 0 ? (
               wishlist.wishlist_items.map((item) => (
-                <div key={item.id} className=" md:w-1/3">
+                <div key={item.id} className="w-1/3 flex justify-center">
                   <ItemCard
                     item={item}
                     listUserId={wishlist.user?.id}
