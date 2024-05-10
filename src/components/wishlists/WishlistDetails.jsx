@@ -22,6 +22,8 @@ export const WishlistDetails = () => {
   const eventDate = formatDate(wishlist.date_of_event);
   const [formattedAddress, setFormattedAddress] = useState("");
   const { profile, setProfile } = useContext(AppContext);
+  const [pinned, setPinned] = useState(false);
+  const [friend, setFriend] = useState(false);
 
   const creationDate = formatDate(wishlist.creation_date);
 
@@ -32,6 +34,24 @@ export const WishlistDetails = () => {
       setWishlist(res);
     });
   }, [listId]);
+
+  //Use effect to see if user has pinned friends list
+  useEffect(() => {
+    if (profile && profile?.friend_pins && profile.friend_pins.length !== 0) {
+      const filter = profile.friend_pins.some((p) => p.wishlist == listId);
+      setPinned(filter);
+    }
+  }, [listId, profile]);
+
+  //Use effect to see if user is a friend
+  useEffect(() => {
+    if (profile && profile?.friends && profile.friends.length !== 0) {
+      const filter = profile.friends.some(
+        (f) => f.friend_info?.id == wishlist.user?.id
+      );
+      setFriend(filter);
+    }
+  }, [wishlist, profile]);
 
   useEffect(() => {
     if (wishlist.address) {
@@ -95,9 +115,7 @@ export const WishlistDetails = () => {
       wishlist: listId,
     };
 
-    createPin(newPin).then((res) => {
-      console.log(res);
-      //refresh the page and remove pin icon after creation
+    createPin(newPin).then(() => {
       getCurrentUserProfile().then((res) => {
         setProfile(res);
       });
@@ -128,7 +146,7 @@ export const WishlistDetails = () => {
             </>
           )}
 
-          {profile.user?.id !== wishlist.user?.id && (
+          {profile.user?.id !== wishlist.user?.id && !pinned && friend && (
             <PinTooltip
               tooltipText={"Pin to Homepage"}
               handlePin={handleFriendPin}
@@ -141,15 +159,19 @@ export const WishlistDetails = () => {
           <h2 className="text-2xl">
             {wishlist.user?.first_name} {wishlist.user?.last_name}
           </h2>
-          {eventDate && (
-            <h3 className="text-lg mt-1">Event Date: {eventDate}</h3>
-          )}
-          <p className="text-lg mt-2">{wishlist.description}</p>
+          {(friend || wishlist.user?.id === profile.user?.id) && (
+            <div>
+              {eventDate && (
+                <h3 className="text-lg mt-1">Event Date: {eventDate}</h3>
+              )}
+              <p className="text-lg mt-2">{wishlist.description}</p>
 
-          {wishlist.address && (
-            <div className="mt-4">
-              <p className="text-base font-semibold">Mailing Address</p>
-              <div className="text-sm">{formattedAddress}</div>
+              {wishlist.address && (
+                <div className="mt-4">
+                  <p className="text-base font-semibold">Mailing Address</p>
+                  <div className="text-sm">{formattedAddress}</div>
+                </div>
+              )}
             </div>
           )}
         </div>
