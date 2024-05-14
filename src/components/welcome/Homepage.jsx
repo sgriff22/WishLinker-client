@@ -3,19 +3,26 @@ import { useContext, useEffect, useState } from "react";
 import AppContext from "../../context/AppContext";
 import { MiniCalendar } from "./MiniCalendar";
 import { WishlistCard } from "../wishlists/WishlistCard";
-import { updateWishlist } from "../services/wishlist";
+import { getFriendsRecentWishlists, updateWishlist } from "../services/wishlist";
 import { getCurrentUserProfile } from "../services/profile";
 import { deletePin, getUsersPins } from "../services/pin";
 
 export const Homepage = () => {
   const { profile, setProfile } = useContext(AppContext);
   const [pins, setPins] = useState([]);
+  const [friendsRecentLists, setFriendsRecentLists] = useState([])
 
   useEffect(() => {
     getUsersPins().then((res) => {
       setPins(res);
     });
   }, []);
+
+  useEffect(() => {
+    getFriendsRecentWishlists().then((res) => {
+      setFriendsRecentLists(res)
+    })
+  }, [])
 
   const handleMyUnpin = (listId, list) => {
     const updatedWishlist = { ...list };
@@ -93,6 +100,11 @@ export const Homepage = () => {
         <div className="flex justify-center w-full">
           <div className="bg-white rounded-lg mr-8 pt-2 pb-4 px-4 w-9/12">
             <h2>Your Friend's Newest Lists</h2>
+            {friendsRecentLists.map((f) => (
+                <div key={f.id}>
+                  <WishlistCard list={f} />
+                </div>
+              ))}
           </div>
           <div className="flex flex-wrap justify-center bg-gray-200 w-80 pb-5 pt-2 px-2 rounded-xl shadow-md">
             <h2 className="w-full mb-2">Upcoming Events</h2>
