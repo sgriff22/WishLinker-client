@@ -207,30 +207,38 @@ export const WishlistDetails = () => {
           currentUserId={profile.user?.id}
         />
       </div>
-      <section className="text-gray-600">
-        <div className="mx-auto">
-          <div className="flex flex-wrap justify-center">
-            {wishlist.wishlist_items && wishlist.wishlist_items.length > 0 ? (
-              wishlist.wishlist_items.map((item) => (
-                <div key={item.id} className="w-1/3 flex justify-center">
-                  <ItemCard
-                    item={item}
-                    listUserId={wishlist.user?.id}
-                    currentUserId={profile.user?.id}
-                    currentUserFriends={profile?.friends}
-                    setWishlist={setWishlist}
-                    spoilValue={wishlist.spoil_surprises}
-                  />
-                </div>
-              ))
-            ) : (
-              <p className="m-auto mt-5">
-                No items in wishlist. Add items or adjust your filter.
-              </p>
-            )}
-          </div>
-        </div>
-      </section>
+
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        {wishlist.wishlist_items &&
+          wishlist.wishlist_items.length > 0 &&
+          wishlist.wishlist_items
+            .filter(
+              (item) =>
+                !(
+                  item.leftover_quantity === 0 &&
+                  (wishlist.user?.id !== profile.user?.id ||
+                    wishlist.spoil_surprises)
+                )
+            )
+            .map((item) => (
+              <div key={item.id} className="flex justify-center">
+                <ItemCard
+                  item={item}
+                  listUserId={wishlist.user?.id}
+                  currentUserId={profile.user?.id}
+                  currentUserFriends={profile?.friends}
+                  setWishlist={setWishlist}
+                  spoilValue={wishlist.spoil_surprises}
+                />
+              </div>
+            ))}
+      </div>
+
+      {wishlist.wishlist_items && wishlist.wishlist_items.length === 0 && (
+        <p className="text-center mt-5">
+          No items in wishlist. Add items or adjust your filter.
+        </p>
+      )}
     </div>
   );
 };

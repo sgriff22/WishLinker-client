@@ -93,4 +93,9 @@
     font-weight: 400;
     text-shadow: 2px 2px #c15b75;
   }
+
+  .selected-event-color {
+    background-color: #e19fae;
+    color: white;
+  }
 }
