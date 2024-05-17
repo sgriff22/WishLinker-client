@@ -61,7 +61,7 @@ VITE v4.4.9  ready in 3531 ms
   ➜  press h to show help
 ```
 
-Open the URL that you see in your browser.
+Open the URL that is shown in your terminal inside a browser.
 
 ### Entering the Site
 
