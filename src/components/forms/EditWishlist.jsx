@@ -21,9 +21,11 @@ export const EditWishlist = () => {
   const formatDate = (dateString) => {
     if (!dateString) return "";
     const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
+  
+    const year = date.getUTCFullYear();  // Use getUTCFullYear to avoid local time zone issues
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");  // Use getUTCMonth
+    const day = String(date.getUTCDate()).padStart(2, "0");  // Use getUTCDate
+  
     return `${year}-${month}-${day}`;
   };
 

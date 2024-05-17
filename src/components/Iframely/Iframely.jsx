@@ -50,26 +50,28 @@ const Iframely = ({ url }) => {
   }, [url]);
 
   if (isLoading) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
   if (error) {
     return (
-      <img
-        src="/media/images/not_image.png"
-        alt="Placeholder"
-        className="lg:h-40 md:h-32 sm:h-24 w-full object-contain object-center bg-white"
-      />
+      <div className="p-3">
+        <img
+          src="/media/images/not_image.png"
+          alt="Placeholder"
+          className="h-32 w-full object-contain object-center rounded-lg bg-white"
+        />
+      </div>
     );
   }
 
   return (
-    <div>
+    <div className="p-3">
       {imageUrl && (
         <img
           src={imageUrl}
           alt="Thumbnail"
-          className="lg:h-40 md:h-32 sm:h-24 w-full object-cover object-center bg-white"
+          className="h-32 w-full object-contain object-bottom bg-white rounded-lg shadow-lg"
         />
       )}
     </div>

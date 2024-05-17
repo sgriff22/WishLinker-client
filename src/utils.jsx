@@ -14,10 +14,11 @@ export const getToken = () => {
 export const formatDate = (dateString) => {
   if (dateString) {
     const creationDate = new Date(dateString);
-    return creationDate.toLocaleString("en-US", {
+    return creationDate.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
+      timeZone: "UTC" // Ensures the date is interpreted in UTC
     });
   } else {
     return null;

@@ -83,3 +83,11 @@ export function getFriendsRecentWishlists() {
     },
   });
 }
+
+export function getUpcomingEvents() {
+  return fetchWithResponse("wishlists/upcoming_events", {
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+}

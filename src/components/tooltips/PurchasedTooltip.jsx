@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 export const PurchasedTooltip = ({ tooltipText, handlePurchase }) => {
   return (
-    <span className="group relative ml-72">
+    <span className="group relative">
       <div className="absolute bottom-[calc(100%+0.5rem)] left-[50%] -translate-x-[50%] hidden group-hover:block w-auto mb-1">
         <div className="bottom-full right-0 rounded bg-black px-4 py-1 text-xs text-white whitespace-nowrap">
           {tooltipText}
@@ -20,7 +20,7 @@ export const PurchasedTooltip = ({ tooltipText, handlePurchase }) => {
       <span>
         <i
           onClick={handlePurchase}
-          className="fa-solid fa-money-check-dollar text-black text-3xl mr-1"
+          className="fa-solid fa-money-check-dollar text-black text-3xl"
         ></i>
       </span>
     </span>

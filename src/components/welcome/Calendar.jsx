@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 export const Calendar = ({ events, onDateClick }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const renderDays = () => {
     const daysInMonth = new Date(
@@ -36,19 +37,30 @@ export const Calendar = ({ events, onDateClick }) => {
       );
       const isCurrentDate =
         currentDay.toDateString() === new Date().toDateString();
-      const eventForDate = events.find(
-        (event) => event.date.toDateString() === currentDay.toDateString()
-      );
+      const isSelected =
+        selectedDate &&
+        selectedDate.toDateString() === currentDay.toDateString();
+      const eventsForDate = events.filter((event) => {
+        const eventDate = new Date(event.date_of_event);
+        return eventDate.toDateString() === currentDay.toDateString();
+      });
 
       const dayClass = `w-8 h-8 text-lg flex items-center justify-center rounded-lg hover:pink-bg hover:text-white ${
-        isCurrentDate ? "pink" : ""
-      } ${eventForDate ? "form-button text-white" : ""} cursor-pointer`;
+        isCurrentDate
+          ? "border border-gray-400 text-black bg-white text-gray-400"
+          : ""
+      } ${eventsForDate.length > 0 ? "form-button" : ""} cursor-pointer  ${
+        isSelected ? "selected-event-color" : ""
+      }`;
 
       days.push(
         <div
           key={i}
           className={dayClass}
-          onClick={() => onDateClick(eventForDate)}
+          onClick={() => {
+            setSelectedDate(currentDay);
+            onDateClick(eventsForDate);
+          }}
         >
           {i}
         </div>
