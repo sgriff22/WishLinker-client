@@ -75,3 +75,19 @@ export function updateWishlist(id, list) {
     body: JSON.stringify(list),
   });
 }
+
+export function getFriendsRecentWishlists() {
+  return fetchWithResponse("wishlists/friends_recent_wishlists", {
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+}
+
+export function getUpcomingEvents() {
+  return fetchWithResponse("wishlists/upcoming_events", {
+    headers: {
+      Authorization: getToken(),
+    },
+  });
+}

@@ -1,7 +1,9 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { apiUrl } from "../../utils";
+import { getCurrentUserProfile } from "../services/profile";
+import AppContext from "../../context/AppContext";
 
 export const Register = () => {
   const [username, setUsername] = useState("admina@straytor.com");
@@ -10,6 +12,8 @@ export const Register = () => {
   const [lastName, setLastName] = useState("Straytor");
   const existDialog = useRef();
   const navigate = useNavigate();
+
+  const { setProfile } = useContext(AppContext);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -29,7 +33,10 @@ export const Register = () => {
       .then((authInfo) => {
         if (authInfo && authInfo.token) {
           localStorage.setItem("wish_token", JSON.stringify(authInfo));
-          navigate("/");
+          getCurrentUserProfile().then((res) => {
+            setProfile(res);
+            navigate("/home");
+          });
         } else {
           existDialog.current.showModal();
         }
@@ -50,11 +57,11 @@ export const Register = () => {
 
       <section>
         <form
-          className="form--login border shadow-md"
+          className="form--login border shadow-md bg-white rounded-lg"
           onSubmit={handleRegister}
         >
-          <h1 className="text-center text-4xl mt-7 mb-3">WishLinker</h1>
-          <h2 className="text-xl mb-5 text-center">Register new account</h2>
+          <h1 className="text-center mt-7">WishLinker</h1>
+          <h2 className="text-xl mb-2 text-center">Register new account</h2>
           <fieldset className="mb-4">
             <label htmlFor="firstName"> First name </label>
             <input
@@ -105,7 +112,7 @@ export const Register = () => {
               placeholder="Password"
             />
           </fieldset>
-          <fieldset>
+          <fieldset className="text-right">
             <button>Register</button>
           </fieldset>
           <div className="loginLinks">

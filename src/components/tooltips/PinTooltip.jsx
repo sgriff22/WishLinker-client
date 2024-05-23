@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 
-export const EditTooltip = ({ tooltipText }) => {
+export const PinTooltip = ({ tooltipText, handlePin }) => {
   return (
     <span className="group relative">
-      <div className="absolute bottom-[calc(100%+0.5rem)] left-[66%] -translate-x-[50%] hidden group-hover:block w-auto">
+      <div className="absolute bottom-[calc(100%+0.5rem)] left-[75%] -translate-x-[50%] hidden group-hover:block w-auto">
         <div className="bottom-full right-0 rounded bg-black px-4 py-1 text-xs text-white whitespace-nowrap">
           {tooltipText}
           <svg
@@ -17,13 +17,14 @@ export const EditTooltip = ({ tooltipText }) => {
           </svg>
         </div>
       </div>
-      <span>
-        <i className="fa-solid fa-pen-to-square ml-4 text-black"></i>
+      <span onClick={handlePin}>
+        <i className="fa-solid fa-thumbtack ml-4"></i>
       </span>
     </span>
   );
 };
 
-EditTooltip.propTypes = {
+PinTooltip.propTypes = {
   tooltipText: PropTypes.string.isRequired,
+  handlePin: PropTypes.func,
 };

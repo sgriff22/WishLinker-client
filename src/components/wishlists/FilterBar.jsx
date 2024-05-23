@@ -43,9 +43,9 @@ export const FilterBar = ({ setWishlist, id, listUserId, currentUserId }) => {
           name="search"
           type="text"
           value={searchQuery}
-          placeholder="Search for item"
+          placeholder="Search for item..."
           onChange={handleInputChange}
-          className="mb-5 mt-5 mr-5 text-lg p-1 rounded-lg border border-gray-400"
+          className="my-5 text-lg px-2 pt-1 border rounded-md shadow-sm"
         />
         {currentUserId === listUserId && (
           <Link to={`/wishlist/${id}/newItem`}>
@@ -56,7 +56,7 @@ export const FilterBar = ({ setWishlist, id, listUserId, currentUserId }) => {
 
       {currentUserId !== listUserId && (
         <select
-          className="w-55 text-lg p-1"
+          className="w-55 text-lg px-2 pb-1 pt-2 border rounded-md shadow-sm text-gray-400"
           value={selectedPriority}
           name="priority"
           onChange={handlePriorityChange}
