@@ -26,7 +26,7 @@ https://drive.google.com/file/d/1tmITe8XDc8Vzz-Z1PoTSUniF7FmCMHCi/view
 
 ## Getting Started
 
-*Before you proceed, please note...*  
+*⚠️ Before you proceed, please note...*  
 This application requires the API to be cloned and served. Please ensure you set up the API server before exploring this repository. Link to api repository https://github.com/sgriff22/WishLinker-api
 
 ### Setup
@@ -64,6 +64,8 @@ VITE v4.4.9  ready in 3531 ms
 Open the URL that is shown in your terminal inside a browser.
 
 ### Entering the Site
+
+⚠️ Before entering the site, make sure you have set up the API server as mentioned above. Without the API server running, you will not be able to log in.
 
 Demo User Credentials:  
 - Username:   `meg@ducharme.com`  
