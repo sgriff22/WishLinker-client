@@ -1,11 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        rose: "#c15b75",
+        pink: "#e2a5b2",
+        lightRose: "#e19fae",
+      },
+    },
   },
   plugins: [],
-}
+};
