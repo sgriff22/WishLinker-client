@@ -44,15 +44,10 @@ export const Register = () => {
   };
 
   return (
-    <main className="container--login mt-20">
-      <dialog className="dialog dialog--auth" ref={existDialog}>
-        <div>User does not exist</div>
-        <button
-          className="button--close"
-          onClick={() => existDialog.current.close()}
-        >
-          Close
-        </button>
+    <main>
+      <dialog className="w-52 rounded-xl py-5 px-2" ref={existDialog}>
+        <div className="text-lg">User already exists</div>
+        <button onClick={() => existDialog.current.close()}>Close</button>
       </dialog>
 
       <section>
@@ -60,64 +55,66 @@ export const Register = () => {
           className="form--login border shadow-md bg-white rounded-lg"
           onSubmit={handleRegister}
         >
-          <h1 className="text-center mt-7">WishLinker</h1>
-          <h2 className="text-xl mb-2 text-center">Register new account</h2>
-          <fieldset className="mb-4">
-            <label htmlFor="firstName"> First name </label>
-            <input
-              type="text"
-              id="firstName"
-              value={firstName}
-              onChange={(evt) => setFirstName(evt.target.value)}
-              className="form-control"
-              placeholder=""
-              required
-              autoFocus
-            />
-          </fieldset>
-          <fieldset className="mb-4">
-            <label htmlFor="lastName"> Last name </label>
-            <input
-              type="text"
-              id="lastName"
-              value={lastName}
-              onChange={(evt) => setLastName(evt.target.value)}
-              className="form-control"
-              placeholder=""
-              required
-              autoFocus
-            />
-          </fieldset>
-          <fieldset className="mb-4">
-            <label htmlFor="inputUsername"> Username </label>
-            <input
-              type="username"
-              id="inputUsername"
-              value={username}
-              onChange={(evt) => setUsername(evt.target.value)}
-              className="form-control"
-              placeholder="Username"
-              required
-              autoFocus
-            />
-          </fieldset>
-          <fieldset className="mb-4">
-            <label htmlFor="inputPassword"> Password </label>
-            <input
-              type="password"
-              id="inputPassword"
-              value={password}
-              onChange={(evt) => setPassword(evt.target.value)}
-              className="form-control"
-              placeholder="Password"
-            />
-          </fieldset>
-          <fieldset className="text-right">
-            <button>Register</button>
-          </fieldset>
+          <h1 className="text-center mt-7 text-2xl sm:text-4xl md:text-5xl">WishLinker</h1>
+          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl mb-2 text-center">Register new account</h2>
+          <div className="w-3/4 mx-auto">
+            <fieldset className="mb-4 text-lg sm:text-2xl">
+              <label htmlFor="firstName"> First name </label>
+              <input
+                type="text"
+                id="firstName"
+                value={firstName}
+                onChange={(evt) => setFirstName(evt.target.value)}
+                className="form-control"
+                placeholder=""
+                required
+                autoFocus
+              />
+            </fieldset>
+            <fieldset className="mb-4 text-lg sm:text-2xl">
+              <label htmlFor="lastName"> Last name </label>
+              <input
+                type="text"
+                id="lastName"
+                value={lastName}
+                onChange={(evt) => setLastName(evt.target.value)}
+                className="form-control"
+                placeholder=""
+                required
+                autoFocus
+              />
+            </fieldset>
+            <fieldset className="mb-4 text-lg sm:text-2xl">
+              <label htmlFor="inputUsername"> Username </label>
+              <input
+                type="username"
+                id="inputUsername"
+                value={username}
+                onChange={(evt) => setUsername(evt.target.value)}
+                className="form-control"
+                placeholder="Username"
+                required
+                autoFocus
+              />
+            </fieldset>
+            <fieldset className="mb-4 text-lg sm:text-2xl">
+              <label htmlFor="inputPassword"> Password </label>
+              <input
+                type="password"
+                id="inputPassword"
+                value={password}
+                onChange={(evt) => setPassword(evt.target.value)}
+                className="form-control"
+                placeholder="Password"
+              />
+            </fieldset>
+            <fieldset className="text-right">
+              <button>Register</button>
+            </fieldset>
+          </div>
           <div className="loginLinks">
             <section className="link--register">
-              <Link className="text-lg underline over:text-red-800" to="/login">
+              <Link className="text-sm sm:text-lg underline over:text-red-800" to="/login">
                 Already have an account?
               </Link>
             </section>
