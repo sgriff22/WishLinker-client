@@ -11,14 +11,12 @@
   display: inline-block;
   margin: 0 auto;
   text-align: left;
-  padding: 0 5rem;
+  padding: 2rem;
   z-index: 1;
   min-height: 25rem;
-  min-width: 35rem;
-}
-
-.form--login > fieldset > input {
-  width: 25em;
+  width: 100%;
+  max-width: 35rem;
+  box-sizing: border-box;
 }
 
 .label--login {
@@ -44,16 +42,4 @@
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.container--login {
-  text-align: center;
-}
 
-.button--close {
-  position: relative;
-  bottom: -2rem;
-}
-
-.dialog {
-  min-width: 15rem;
-  min-height: 5rem;
-}
